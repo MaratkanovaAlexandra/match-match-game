@@ -3,6 +3,7 @@
 .wrapper {
     max-width: 1000px;
     margin: 33px auto 0 auto;
+    padding: 28px 0 85px 36px;
 }
 
 .howtoplay {
@@ -41,18 +42,19 @@
         max-width: 360px;
         height: 100%;
         padding: 16px 16px 0 16px;
+        background-color: white;
     }
 
     &__step-fisrt {
-        flex: 0 1 31.7%;
+        flex: 0 1 36.7%;
         margin: 0 0 16px 0;
     }
     &__step-second {
-        flex: 0 1 18%;
+        flex: 0 1 20%;
         margin: 0 0 21px 0;
     }
     &__step-third {
-        flex: 0 1 33%;
+        flex: 0 1 38%;
     }
     &__img-reg {
         margin: 0 0 28px 0;
