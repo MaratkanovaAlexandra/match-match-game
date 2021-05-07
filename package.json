@@ -11,7 +11,8 @@
     "author": "Maratkanova Aleksandra",
     "license": "ISC",
     "dependencies": {
-        "package": "^1.0.1"
+        "package": "^1.0.1",
+        "normalize.css": "^8.0.1"
     },
     "devDependencies": {
         "@typescript-eslint/eslint-plugin": "^4.22.1",
