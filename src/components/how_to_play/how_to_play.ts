@@ -1,8 +1,9 @@
 import "./zeroing.scss";
 import "./how_to_play.scss";
 
+
 function createAndAppendHtmlElement(appendElement: HTMLElement, typeElement: string, classElement?: string,  value?: string) : HTMLElement {
-    let element = document.createElement(typeElement);
+    const element = document.createElement(typeElement);
     if (typeof classElement !== 'undefined') element.classList.add(classElement);
     if (typeof value !== 'undefined')  element.innerText = value;
     appendElement.appendChild(element);
@@ -16,29 +17,24 @@ export class HowToPlay {
         this.howtoplay.classList.add("wrapper");
         
         createAndAppendHtmlElement(this.howtoplay, "h3", "howtoplay__title", "How to play?");
-        createAndAppendHtmlElement(this.howtoplay, "div", "howtoplay__column");
-        createAndAppendHtmlElement(this.howtoplay, "div", "howtoplay__column");
+        const howtoplay__wrapper = createAndAppendHtmlElement(this.howtoplay, "h3", "howtoplay__wrapper");
+        const howtoplay__column1 = createAndAppendHtmlElement(howtoplay__wrapper, "div", "howtoplay__column");
+        const howtoplay__step_fisrt = createAndAppendHtmlElement(howtoplay__column1, "div", "howtoplay__step-fisrt");
+        createAndAppendHtmlElement(howtoplay__step_fisrt, "div", "step__number", "1");
+        createAndAppendHtmlElement(howtoplay__step_fisrt, "div", "step__text", "Register new player in game");
+        const howtoplay__step_second = createAndAppendHtmlElement(howtoplay__column1, "div", "howtoplay__step-second");
+        createAndAppendHtmlElement(howtoplay__step_second, "div", "step__number", "2");
+        createAndAppendHtmlElement(howtoplay__step_second, "div", "step__text", "Configure your game settings");
+        const howtoplay__step_third = createAndAppendHtmlElement(howtoplay__column1, "div", "howtoplay__step-third");
+        createAndAppendHtmlElement(howtoplay__step_third, "div", "step__number", "3");
+        createAndAppendHtmlElement(howtoplay__step_third, "div", "step__text", "Start you new game! Remember card positions and match it before times up.");
 
-        let howtoplay__step_first = document.createElement("div");
-        howtoplay__step_first.classList.add("howtoplay__step-first");
-
-        let step_first__number = document.createElement("div");
-        step_first__number.classList.add("step_first__number");
-        step_first__number.innerText = "1";
-        
-        let step_first__text =  document.createElement("div");
-        step_first__text.classList.add("step_first__text");
-        step_first__text.innerText = "Register new player in game";
-
-        let howtoplay__step_second = document.createElement("div");
-        howtoplay__step_second.classList.add("howtoplay__step-second");
-
-
-        howtoplay__step_first.appendChild(step_first__number);
-        howtoplay__step_first.appendChild(step_first__text);
-///////////////////////////////////////////////////////////////     
-
-
-    
+        const howtoplay__column2 = createAndAppendHtmlElement(howtoplay__wrapper, "div", "howtoplay__column");
+        const img1 = createAndAppendHtmlElement(howtoplay__column2, "img", "howtoplay__img-reg");
+        img1.setAttribute("src", "./dist/img/image1.jpg");
+        const img2 = createAndAppendHtmlElement(howtoplay__column2, "img", "howtoplay__img-set");
+        img2.setAttribute("src", "./dist/img/image2.jpg");
+        const img3 = createAndAppendHtmlElement(howtoplay__column2, "img", "howtoplay__img-game");
+        img3.setAttribute("src", "./dist/img/image3.jpg");
     }
 }
