@@ -58,9 +58,22 @@
     }
     &__img-reg {
         margin: 0 0 28px 0;
+
+        width: 100%;
+        height: 218px;
+        background: url(./assets/image1.jpg) 100% 100% no-repeat;
     }
     &__img-set {
         margin: 0 0 80px 0;
+        width: 100%;
+        height: 73px;
+        background: url(./assets/image2.jpg) 100% 100% no-repeat;
+    }
+    &__img-game {
+        min-width: 330px;
+        width: 100%;
+        height: 240px;
+        background: url(./assets/image3.jpg) 100% 100% no-repeat;
     }
 }
 
