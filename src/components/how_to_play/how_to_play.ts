@@ -1,14 +1,5 @@
-import "./zeroing.scss";
 import "./how_to_play.scss";
-
-
-function createAndAppendHtmlElement(appendElement: HTMLElement, typeElement: string, classElement?: string,  value?: string) : HTMLElement {
-    const element = document.createElement(typeElement);
-    if (typeof classElement !== 'undefined') element.classList.add(classElement);
-    if (typeof value !== 'undefined')  element.innerText = value;
-    appendElement.appendChild(element);
-    return element;
-}
+const createAndAppendHtmlElement =  require( "../../add-element-function");
 
 export class HowToPlay {
     howtoplay: HTMLElement;
