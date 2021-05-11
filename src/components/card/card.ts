@@ -2,15 +2,17 @@ import "./card.scss";
 const createAndAppendHtmlElement =  require( "../../add-element-function");
 
 export class Card {
-    card: HTMLElement;
-    srcImgBack: string;
-    srcImgFront: "";
-    id: number;
-    constructor(srcImgBack:string, id:number, srcImgFront?:string) {
-        this.srcImgBack = srcImgBack;
-        this.id = id;
+        card: HTMLElement;
+    private _srcImgBack: string;
+    private _srcImgFront: "../../assets/game/front_card.png";
+    private _id: number;
+    constructor(srcImgBack:string, id:number, srcImgFront?:any) {
+        this._srcImgBack = srcImgBack;
+        this._id = id;
         this.card = document.createElement("div");
         this.card.classList.add("card");
+        if(typeof srcImgFront !== undefined) 
+            this._srcImgFront = srcImgFront;
 
         let cardBack = createAndAppendHtmlElement(this.card, "div", "card__back");
         cardBack.style.backgroundImage = srcImgBack;
@@ -18,10 +20,6 @@ export class Card {
         let cardFront = createAndAppendHtmlElement(this.card, "div", "card__front"); 
         cardFront.style.backgroundImage = srcImgFront;
 
-        this.card.addEventListener("click", this.cardOnClick);
-    }
-    cardOnClick(){
-        this.card.classList.add("active");
     }
     cardActive() {
         this.card.classList.add("active");
