@@ -1,4 +1,3 @@
-import "./header.scss";
 const createAndAppendHtmlElement =  require( "../../add-element-function");
 
 export class Header {

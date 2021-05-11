@@ -1,4 +1,3 @@
-import "./how_to_play.scss";
 const createAndAppendHtmlElement =  require( "../../add-element-function");
 
 export class HowToPlay {
