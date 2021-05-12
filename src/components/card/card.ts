@@ -1,24 +1,22 @@
 import "./card.scss";
-const createAndAppendHtmlElement =  require( "../../add-element-function");
+const createAndAppendHtmlElement = require( "../../add-element-function");
+//const a = require("./../../assets/game/animals/1.png")
 
 export class Card {
-        card: HTMLElement;
-    private _srcImgBack: string;
-    private _srcImgFront: "../../assets/game/front_card.png";
+    card: HTMLElement;
+    private _srcImgBack: any;
     private _id: number;
-    constructor(srcImgBack:string, id:number, srcImgFront?:any) {
+    constructor(srcImgBack:any, id:number) {
         this._srcImgBack = srcImgBack;
         this._id = id;
         this.card = document.createElement("div");
         this.card.classList.add("card");
-        if(typeof srcImgFront !== undefined) 
-            this._srcImgFront = srcImgFront;
 
         let cardBack = createAndAppendHtmlElement(this.card, "div", "card__back");
-        cardBack.style.backgroundImage = srcImgBack;
-        
-        let cardFront = createAndAppendHtmlElement(this.card, "div", "card__front"); 
-        cardFront.style.backgroundImage = srcImgFront;
+        cardBack.style.backgroundImage = `url(${require(`./../../assets/game/animals/${srcImgBack}.png`).default})`
+        //let img = createAndAppendHtmlElement(cardBack, "img", "card__img");
+        //img.src = require(`./../../assets/game/animals/${srcImgBack}.png`).default;
+        createAndAppendHtmlElement(this.card, "div", "card__front"); 
 
     }
     cardActive() {

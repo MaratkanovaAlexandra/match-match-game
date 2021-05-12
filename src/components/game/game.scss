@@ -1,0 +1,43 @@
+.game {
+    max-width: 1440px;
+    margin: 33px auto 0 auto;
+    padding: 27px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    &__timer {
+        margin: 0 0 33px 0;
+    }
+    &__wrapper {
+        display: flex;
+
+    }
+    &__row {
+
+    }
+}
+.timer {
+    width: 255px;
+    height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24);
+
+    &__wrapper {
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 36px;
+        line-height: 30px;
+        /* or 83% */
+        display: flex;
+        align-items: center;
+        text-align: center;
+        letter-spacing: 0.15px;
+
+        color: rgba(0, 0, 0, 0.4);
+    }
+}
