@@ -21,9 +21,9 @@ export class Game {
     
     constructor(difficulty:number) {
         this._difficulty = difficulty;
-        this._height_game = this._difficulty;
-        if (this._difficulty % 2 !== 0) this._width_game = this._difficulty + 1;
-        else this._width_game = this._difficulty;
+        this._width_game = this._difficulty;
+        if (this._difficulty % 2 !== 0) this._height_game = this._difficulty + 1;
+        else this._height_game = this._difficulty;
         
 
         this.game = document.createElement("div");
@@ -34,15 +34,22 @@ export class Game {
         const timer_wrapper = createAndAppendHtmlElement(timer, "div", "timer__wrapper");
         timer_wrapper.innerText = "00:00";
 
-
         const game_wrapper = createAndAppendHtmlElement(this.game, "div", "game__wrapper");
-        let counter = 0;
-        for(let i = 0; i < this._width_game; i++) {
+        for(let i = 0; i < this._height_game; i++) {
             const game_row = createAndAppendHtmlElement(game_wrapper, "div", "game__row");
-            for(let j = 0; j < this._height_game; j++) {
-                const card = new Card(++counter, ++counter).card;
-                game_row.appendChild(card);
+            for(let j = 0; j < this._width_game / 2; j++) {
+                this.createPairCards(game_row);
             }
         }
+    }
+    getRandomArbitrary(min:number, max:number) {
+        return Math.floor(Math.random() * (max - min) + min);
+    }
+    createPairCards(row:HTMLElement) {
+        const random_img_number = this.getRandomArbitrary(1, 51);
+        const card1 = new Card(random_img_number, random_img_number).card;
+        const card2 = new Card(random_img_number, random_img_number).card;
+        row.appendChild(card1);
+        row.appendChild(card2);
     }
 }

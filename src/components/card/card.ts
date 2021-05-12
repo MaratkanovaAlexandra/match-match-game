@@ -1,6 +1,5 @@
 import "./card.scss";
 const createAndAppendHtmlElement = require( "../../add-element-function");
-//const a = require("./../../assets/game/animals/1.png")
 
 export class Card {
     card: HTMLElement;
@@ -14,10 +13,7 @@ export class Card {
 
         let cardBack = createAndAppendHtmlElement(this.card, "div", "card__back");
         cardBack.style.backgroundImage = `url(${require(`./../../assets/game/animals/${srcImgBack}.png`).default})`
-        //let img = createAndAppendHtmlElement(cardBack, "img", "card__img");
-        //img.src = require(`./../../assets/game/animals/${srcImgBack}.png`).default;
         createAndAppendHtmlElement(this.card, "div", "card__front"); 
-
     }
     cardActive() {
         this.card.classList.add("active");
