@@ -1,0 +1,170 @@
+.pop_up {
+  @include center;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba($color: #000000, $alpha: 0.25);
+  &_window {
+    background: #fafafa;
+    width: 639px;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2), 0px 3px 4px rgba(0, 0, 0, 0.12),
+      0px 2px 4px rgba(0, 0, 0, 0.14);
+    border-radius: 4px;
+
+    &__header {
+      background: #ffffff;
+      width: 100%;
+      height: 67px;
+      padding: 20px 16px;
+      box-sizing: border-box;
+      border-radius: 4px 4px 0 0;
+
+      &-text {
+        height: min-content;
+        @include uptext;
+      }
+    }
+    &__form {
+      position: relative;
+      height: 334px;
+      margin: 33px 19px 26px 21px;
+
+      &_filds {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-right: 50.5px;
+
+        &_inputs {
+          display: flex;
+          flex-direction: column;
+
+          &-label {
+            position: relative;
+            height: 56px;
+            width: 328px;
+            background: rgba(33, 33, 33, 0.08);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.6);
+
+            display: flex;
+            flex-direction: column;
+
+            border-radius: 4px 4px 0 0;
+            box-sizing: border-box;
+            padding: 8px 0 8px 52px;
+            margin-bottom: 16px;
+            &::after {
+              content: "";
+              position: absolute;
+              height: 18px;
+              width: 18px;
+              top: 18px;
+              right: 18px;
+              border-radius: 5px;
+              border: 1px solid rgba(0, 0, 0, 0.38);
+            }
+          }
+          &-text {
+            height: min-content;
+            margin: 0;
+
+            font-family: "Roboto";
+            font-style: normal;
+            font-weight: normal;
+            font-size: 12px;
+            line-height: 16px;
+            letter-spacing: 0.4px;
+            color: rgba(0, 0, 0, 0.38);
+          }
+          &-input {
+            background: transparent;
+            border: none;
+            outline: none;
+            height: 22px;
+            width: 14rem;
+            padding: 0;
+
+            font-family: "Roboto";
+            font-style: normal;
+            font-weight: normal;
+            font-size: 16px;
+            line-height: 24px;
+            letter-spacing: 0.15px;
+            color: rgba(0, 0, 0, 0.87);
+          }
+        }
+        &-image {
+          height: 163px;
+          width: 163px;
+          border-radius: 50%;
+          object-fit: cover;
+          background-image: url(../assets/images/avatar.png);
+          background-position: center;
+
+          cursor: pointer;
+        }
+        &-file {
+          width: 100%;
+          height: 100%;
+          opacity: 0;
+          border-radius: 50%;
+
+          cursor: pointer;
+        }
+      }
+      &_buttons {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 218px;
+
+        display: flex;
+        justify-content: space-between;
+      }
+      &_button-blue,
+      &_button-light {
+        height: 36px;
+        @include center;
+
+        font-family: "Roboto";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 16px;
+
+        letter-spacing: 1.25px;
+        text-transform: uppercase;
+
+        box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.12),
+          0px 2px 2px rgba(0, 0, 0, 0.24);
+        border-radius: 4px;
+
+        will-change: transform;
+        transition: transform 0.3s;
+
+        &:active {
+          transform: scale(0.96);
+          box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.22),
+            0px 2px 2px rgba(0, 0, 0, 0.34);
+        }
+      }
+      &_button-blue {
+        width: 108px;
+        background: $blue;
+        border: 1px solid $blue;
+
+        color: #ffffff;
+      }
+      &_button-light {
+        width: 93px;
+        background: #e3f2fd;
+        border: 1px solid #e3f2fd;
+
+        color: $blue;
+      }
+    }
+  }
+}

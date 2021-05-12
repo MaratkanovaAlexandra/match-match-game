@@ -3,6 +3,7 @@ export class Player {
   private _lastName: string;
   private _email: string;
   private _score: number;
+  private _image: ImageData;
 
   constructor(firstName: string, lastName: string, email: string) {
     this.firstName = firstName;
@@ -10,7 +11,7 @@ export class Player {
     this.email = email;
     this.score = 0;
   }
-
+  //first name getter and setter
   get firstName() {
     return this._firstName;
   }
@@ -20,6 +21,7 @@ export class Player {
     this._firstName = value;
   }
 
+  //last name getter and setter
   get lastName() {
     return this._lastName;
   }
@@ -29,6 +31,7 @@ export class Player {
     this._lastName = value;
   }
 
+  //email getter and setter
   get email() {
     return this._email;
   }
@@ -38,6 +41,7 @@ export class Player {
     this._email = value;
   }
 
+  //score getter and setter
   get score() {
     return this._score; 
   }
