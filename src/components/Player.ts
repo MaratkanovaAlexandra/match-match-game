@@ -12,7 +12,7 @@ export class Player {
     this.score = 0;
   }
   //first name getter and setter
-  get firstName() {
+  get firstName():string {
     return this._firstName;
   }
   set firstName(value: string) {
@@ -22,7 +22,7 @@ export class Player {
   }
 
   //last name getter and setter
-  get lastName() {
+  get lastName():string {
     return this._lastName;
   }
   set lastName(value: string) {
@@ -32,7 +32,7 @@ export class Player {
   }
 
   //email getter and setter
-  get email() {
+  get email():string {
     return this._email;
   }
   set email(value: string) {
@@ -42,7 +42,7 @@ export class Player {
   }
 
   //score getter and setter
-  get score() {
+  get score():number {
     return this._score; 
   }
   set score(value:number) {
