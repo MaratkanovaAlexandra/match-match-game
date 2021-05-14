@@ -12,4 +12,4 @@ const HOWTOPlAY = new HowToPlay();
 const REGISTRATION = new Registration();
 ROOT.appendChild(HEADER.header);
 ROOT.appendChild(HOWTOPlAY.howtoplay);
-document.body.appendChild(REGISTRATION.pop_up)
+//document.body.appendChild(REGISTRATION.pop_up)

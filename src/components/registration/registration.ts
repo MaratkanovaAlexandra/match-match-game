@@ -1,5 +1,6 @@
 const createAndAppendHtmlElement =  require( "../../add-element-function");
-function createInput(parent:HTMLElement, text:string) {
+
+function createInput(parent:HTMLElement, text:string):HTMLElement {
     const LABEL =  createAndAppendHtmlElement(parent, "label", "pop_up_window__form_filds_inputs-label");
     createAndAppendHtmlElement(LABEL, "h6", "pop_up_window__form_filds_inputs-text", text);
     const INPUT = createAndAppendHtmlElement(LABEL, "input", "pop_up_window__form_filds_inputs-input");
@@ -10,13 +11,13 @@ function createInput(parent:HTMLElement, text:string) {
 export class Registration {
     pop_up: HTMLElement;
     pop_up__window: HTMLElement;
-    image: any;
-    first_name: any;
-    last_name: any;
-    email: any;
-    image_input: any;
     submin_button: HTMLElement;
     exit_button: HTMLElement;
+    first_name: HTMLElement;
+    last_name: HTMLElement;
+    email: HTMLElement;
+    image: any;
+    image_input: any;
     constructor() {
         this.pop_up = document.createElement("section");
         this.pop_up.classList.add("pop_up");
@@ -49,5 +50,17 @@ export class Registration {
         const BUTTONS = createAndAppendHtmlElement(FORM, "div","pop_up_window__form_buttons" )
         this.submin_button = createAndAppendHtmlElement(BUTTONS, "button","pop_up_window__form_button-blue","Add user");
         this.exit_button = createAndAppendHtmlElement(BUTTONS, "button","pop_up_window__form_button-light","cancel");
+
+        this.submin_button.addEventListener("click", this.submit)
+        this.exit_button.addEventListener("click", this.clean)
+    }
+
+    submit() {
+        
+        return false;
+    }
+
+    clean() {
+        return false;
     }
 } 
