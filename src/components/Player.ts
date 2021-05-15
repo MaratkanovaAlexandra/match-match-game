@@ -3,13 +3,14 @@ export class Player {
   lastName: string;
   email: string;
   score: number;
-  image: ImageData;
+  image: any;
 
-  constructor(firstName: string, lastName: string, email: string) {
+  constructor(firstName: string, lastName: string, email: string, image:any) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
     this.score = 0;
+    this.image = image;
   }
 //!/^[a-zAA-z]+$/.test(value)
 //!/^[a-zAA-z]+$/.test(value)
