@@ -19,6 +19,7 @@
     backface-visibility: hidden;
    }
   .card__front {
+    position: relative;
     background: url('../../assets/game/front_card.png') center no-repeat;
   }
   .card__back {
@@ -38,4 +39,43 @@
   }
   .active .card__back  {
     transform: rotateY(360deg);
+  }
+
+  .error .card__back::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(242, 78, 30, 0.5);
+    border-radius: 4px;
+  }
+  .error .card__back::before {
+    content: url(../../assets/game/error.svg);
+    position: absolute;
+    top: 0;
+    left: 100%;
+    transform: translateX(-100% ) translateX(-10px) translateY(10px);
+  }
+
+
+  .correctly .card__back::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    height: 100%;
+    width: 100%;
+    background: rgba(10, 207, 131, 0.5);
+    border-radius: 4px;
+  }
+
+  .correctly .card__back::before {
+    content: url(../../assets/game/correctly.svg);
+    position: absolute;
+    top: 0;
+    left: 100%;
+    transform: translateX(-100% ) translateX(-10px) translateY(10px);
   }

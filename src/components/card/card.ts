@@ -15,6 +15,11 @@ export class Card {
         cardBack.style.backgroundImage = `url(${require(`./../../assets/game/animals/${srcImgBack}.png`).default})`
         createAndAppendHtmlElement(this.card, "div", "card__front"); 
     }
+    
+    public get getId() : number {
+        return this._id
+    }
+    
     cardActive() {
         this.card.classList.add("active");
     }

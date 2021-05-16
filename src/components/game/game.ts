@@ -16,10 +16,8 @@ export class Game {
     private _width_game: number;
     private _height_game: number;
     private _arr_cards: Card[] = [];
-    private _pairCards:object = {
-        card1: HTMLElement,
-        card2: HTMLElement
-    };
+    card1: Card;
+    card2: Card;
     private _difficulty: number;
     private _stop:boolean = false;
     private _arr_use_imgs: number[] = [];
@@ -46,30 +44,60 @@ export class Game {
         const game_wrapper = createAndAppendHtmlElement(this.game, "div", "game__wrapper");
         this.drawCards(game_wrapper);
 
+        // Start Game
         setTimeout(() => {
             this.runTimer( timer_wrapper, new Date() )
             this._arr_cards.map( (card:Card) => {
                 card.cardDeactivat();
                 card.card.addEventListener("click", () => {
-                    card.cardActive()
+                    if(!card.card.classList.contains("correctly")){
+                        if(this.card1 === undefined)  this.card1 = card;
+                        else if(this.card2 === undefined){
+                            this.card2 = card;
+                            this.checkCards();
+    
+                        } 
+                        card.cardActive();
+                    }
                 })
             })
-        }, 10000)
-
+        }, 10000);
     }
+    checkCards() {
+        this._moves++;
+        if(this.card1.getId === this.card2.getId){
+            this.card1.cardCorrectly();
+            this.card2.cardCorrectly();
+        } else {
+            this._wrong_moves++;
+            this.card1.cardError();
+            this.card2.cardError();
+            const card1 = this.card1;
+            const card2 = this.card2
+            setTimeout(()=>{
+                card1.cardDeactivat();
+                card2.cardDeactivat();
 
+            }, 1500);
+        }
+        this.card1 = undefined;
+        this.card2 = undefined
+    }
 
     runTimer(timerHTML:HTMLElement, time_start:Date) {
         setInterval(() => {
             if(!this._stop){
                 const now_time = new Date();
                 const def_time = Math.floor( (now_time.getTime() - time_start.getTime()) / 1000 )
+                
                 this._time.minute = Math.floor( def_time / 60 ) ;
                 this._time.seconds = def_time % 60;
+
                 const str_time_minute = String( this._time.minute ).length === 2 ? 
                     String( this._time.minute ) : String( "0" + this._time.minute );
                 const str_time_seconds = String( this._time.seconds ).length === 2 ? 
                     String( this._time.seconds ) : String( "0" + this._time.seconds )
+
                 timerHTML.innerHTML = `${ str_time_minute }:${ str_time_seconds } `
             }
         }, 1000)
