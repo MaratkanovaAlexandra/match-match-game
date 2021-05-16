@@ -160,14 +160,18 @@ export class Game {
             }  
         }
     }
-
+    //// TODO ТУТ ПОЛНАЯ ХРЕНЬ
     drawWindowWinner() {
         const window_winner = createAndAppendHtmlElement(this.game, "div", "window_winner");
         const window_winner__window = createAndAppendHtmlElement(window_winner, "div", "window_winner__window");
-        const text = `Congratulations! You successfully found all matches on ${this._time.minute}.${this._time.seconds} minutes.`;
+        const text = `Congratulations! You successfully found all matches on ${this._time.minute}.${this._time.seconds / 60} minutes.`;
         createAndAppendHtmlElement(window_winner__window, "div", "window_winner__text", text);
         const window_winner__btn = createAndAppendHtmlElement(window_winner__window, "div", "window_winner__btn");
         const window_winner__link = createAndAppendHtmlElement(window_winner__btn, "a", "window_winner__link", "OK");
+
+
+
+        //TODO САША ПИШИ СЮДА ССЫЛКУ
         window_winner__link.setAttribute("href", "./");
     }
 }
