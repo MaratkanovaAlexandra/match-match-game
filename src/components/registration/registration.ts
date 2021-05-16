@@ -1,5 +1,6 @@
 const createAndAppendHtmlElement =  require( "../../add-element-function");
 import { EntryPlugin } from "webpack";
+import { resolve } from "../../../webpack.config";
 import {Player} from "./../Player"
 
 function createInput(parent:HTMLElement, text:string):HTMLInputElement {
@@ -91,9 +92,17 @@ export class Registration {
         return this._pop_up;
     }
 
-    get player():Player {
+    get button():HTMLInputElement {
+        return this._submin_button
+    } 
+
+    get player():any {
         return this._player;
     } 
+
+    get comlite():boolean {
+        return this.complited();
+    }
 
     private validate_name_input(INPUT:HTMLInputElement, tooltip:HTMLElement) {
         if(tooltip){
@@ -127,7 +136,7 @@ export class Registration {
             this._email_tooltip = showMistake(this._email,"email can not be empty");
             return this._email_tooltip;
         }
-        if(!/^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/.test(this._email.value)) {
+        if(!/^([a-zA-Z0-9_-]+\.)*[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)*\.[a-z]{2,6}$/.test(this._email.value)) {
             this._email_tooltip = showMistake(this._email,"it's not an email");
             return this._email_tooltip;
         }
@@ -149,7 +158,7 @@ export class Registration {
     private complited():boolean {
         return /^[a-zAA-z]+$/.test(this._first_name.value) &&
                /^[a-zAA-z]+$/.test(this._last_name.value) &&
-               /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/.test(this._email.value);
+               /^([a-zA-Z0-9_-]+\.)*[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)*\.[a-z]{2,6}$/.test(this._email.value);
     }
 
     private submit() {

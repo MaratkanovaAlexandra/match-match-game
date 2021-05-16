@@ -37,7 +37,7 @@
   }
   .header__button {
     height: 36px;
-    width: 207px;
+    padding: 0 16px;
 
     display: flex;
     align-items: center;
@@ -109,5 +109,15 @@
       opacity: 1;
       background: $blue-hover;
     }
+  }
+  &__image {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    margin-left: 1.9em;
+    background-image: url(../assets/images/avatar.png);
+    background-color: #fafafa;
+    background-position: center;
+    background-size: auto 40px;
   }
 }
