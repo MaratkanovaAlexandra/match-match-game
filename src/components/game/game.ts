@@ -9,18 +9,18 @@ export class Game {
         minute: 0,
         seconds: 0
     };
-    private _score:number =  0;
     private _moves:number = 0;
     private _wrong_moves:number = 0;
-    private _you_win:boolean = false;
     private _width_game: number;
     private _height_game: number;
     private _arr_cards: Card[] = [];
-    card1: Card;
-    card2: Card;
+    private card1: Card;
+    private card2: Card;
     private _difficulty: number;
     private _stop:boolean = false;
     private _arr_use_imgs: number[] = [];
+    private countCorrectCards:number = 0;
+    private timer_wrapper:HTMLElement;
     
     constructor(difficulty:number) {
         this._difficulty = difficulty;
@@ -34,8 +34,8 @@ export class Game {
 
         const timerHTML = createAndAppendHtmlElement(this.game, "div", "game__timer");
         timerHTML.classList.add("timer");
-        const timer_wrapper = createAndAppendHtmlElement(timerHTML, "div", "timer__wrapper");
-        timer_wrapper.innerText = "00:00";
+        this.timer_wrapper = createAndAppendHtmlElement(timerHTML, "div", "timer__wrapper");
+        this.timer_wrapper.innerText = "00:00";
 
         for(let j = 0; j < this._height_game * (this._width_game / 2); j++) {
             this.createPairCards();
@@ -45,39 +45,51 @@ export class Game {
         this.drawCards(game_wrapper);
 
         // Start Game
+        this.startGame();
+    }
+    startGame() {
         setTimeout(() => {
-            this.runTimer( timer_wrapper, new Date() )
+            this.card1 = undefined;
+            this.card2 = undefined;
+            this.runTimer(this.timer_wrapper, new Date() )
             this._arr_cards.map( (card:Card) => {
                 card.cardDeactivat();
-                card.card.addEventListener("click", () => {
-                    if(!card.card.classList.contains("correctly")){
-                        if(this.card1 === undefined)  this.card1 = card;
-                        else if(this.card2 === undefined){
-                            this.card2 = card;
-                            this.checkCards();
-    
-                        } 
-                        card.cardActive();
-                    }
-                })
+                card.card.addEventListener("click", () => this.onClickCard(card))
             })
         }, 10000);
     }
+
+    onClickCard(card:Card) {
+        if(!card.card.classList.contains("correctly")){
+            if(this.card1 === undefined)  this.card1 = card;
+            else if(this.card2 === undefined){
+                this.card2 = card;
+                this.checkCards();
+            } 
+            card.cardActive();
+        }
+    }
+
     checkCards() {
         this._moves++;
+    
         if(this.card1.getId === this.card2.getId){
             this.card1.cardCorrectly();
             this.card2.cardCorrectly();
+            this.countCorrectCards++;
+            if(this.countCorrectCards === this._arr_cards.length / 2){
+                this._stop = true;
+                this.drawWindowWinner()
+            }
         } else {
             this._wrong_moves++;
             this.card1.cardError();
             this.card2.cardError();
             const card1 = this.card1;
-            const card2 = this.card2
+            const card2 = this.card2;
             setTimeout(()=>{
                 card1.cardDeactivat();
                 card2.cardDeactivat();
-
             }, 1500);
         }
         this.card1 = undefined;
@@ -145,5 +157,15 @@ export class Game {
                 game_row = createAndAppendHtmlElement(parent, "div", "game__row");
             }  
         }
+    }
+
+    drawWindowWinner() {
+        const window_winner = createAndAppendHtmlElement(this.game, "div", "window_winner");
+        const window_winner__window = createAndAppendHtmlElement(window_winner, "div", "window_winner__window");
+        const text = `Congratulations! You successfully found all matches on ${this._time.minute}.${this._time.seconds} minutes.`;
+        createAndAppendHtmlElement(window_winner__window, "div", "window_winner__text", text);
+        const window_winner__btn = createAndAppendHtmlElement(window_winner__window, "div", "window_winner__btn");
+        const window_winner__link = createAndAppendHtmlElement(window_winner__btn, "a", "window_winner__link", "OK");
+        window_winner__link.setAttribute("href", "./");
     }
 }
