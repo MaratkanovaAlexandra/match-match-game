@@ -27,7 +27,15 @@
     background-repeat: no-repeat;
     transform: rotateY(180deg);
   }
-  .card:hover .card__front {
-    transform: rotateY(180deg);}
-  .card:hover .card__back {
-    transform: rotateY(360deg);}
+  // .card:hover .card__front {
+  //   transform: rotateY(180deg);
+  // }
+  // .card:hover .card__back {
+  //   transform: rotateY(360deg);
+  // }
+  .active .card__front {
+    transform: rotateY(180deg);
+  }
+  .active .card__back  {
+    transform: rotateY(360deg);
+  }

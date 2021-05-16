@@ -16,12 +16,13 @@ export class Game {
     private _width_game: number;
     private _height_game: number;
     private _arr_cards: Card[] = [];
-    private _pairCards: {
+    private _pairCards:object = {
         card1: HTMLElement,
         card2: HTMLElement
     };
     private _difficulty: number;
-    stop: false;
+    private _stop:boolean = false;
+    private _arr_use_imgs: number[] = [];
     
     constructor(difficulty:number) {
         this._difficulty = difficulty;
@@ -37,29 +38,40 @@ export class Game {
         timerHTML.classList.add("timer");
         const timer_wrapper = createAndAppendHtmlElement(timerHTML, "div", "timer__wrapper");
         timer_wrapper.innerText = "00:00";
-        this.runTimer( timer_wrapper, new Date() )
 
         for(let j = 0; j < this._height_game * (this._width_game / 2); j++) {
             this.createPairCards();
         }
-
         this._arr_cards = this.mixArrCards(this._arr_cards, 5);
-
         const game_wrapper = createAndAppendHtmlElement(this.game, "div", "game__wrapper");
         this.drawCards(game_wrapper);
+
+        setTimeout(() => {
+            this.runTimer( timer_wrapper, new Date() )
+            this._arr_cards.map( (card:Card) => {
+                card.cardDeactivat();
+                card.card.addEventListener("click", () => {
+                    card.cardActive()
+                })
+            })
+        }, 10000)
+
     }
+
 
     runTimer(timerHTML:HTMLElement, time_start:Date) {
         setInterval(() => {
-            const now_time = new Date();
-            const def_time = Math.floor( (now_time.getTime() - time_start.getTime()) / 1000 )
-            this._time.minute = Math.floor( def_time / 60 ) ;
-            this._time.seconds = def_time % 60;
-            const str_time_minute = String( this._time.minute ).length === 2 ? 
-                String( this._time.minute ) : String( "0" + this._time.minute );
-            const str_time_seconds = String( this._time.seconds ).length === 2 ? 
-                String( this._time.seconds ) : String( "0" + this._time.seconds )
-            timerHTML.innerHTML = `${ str_time_minute }:${ str_time_seconds } `
+            if(!this._stop){
+                const now_time = new Date();
+                const def_time = Math.floor( (now_time.getTime() - time_start.getTime()) / 1000 )
+                this._time.minute = Math.floor( def_time / 60 ) ;
+                this._time.seconds = def_time % 60;
+                const str_time_minute = String( this._time.minute ).length === 2 ? 
+                    String( this._time.minute ) : String( "0" + this._time.minute );
+                const str_time_seconds = String( this._time.seconds ).length === 2 ? 
+                    String( this._time.seconds ) : String( "0" + this._time.seconds )
+                timerHTML.innerHTML = `${ str_time_minute }:${ str_time_seconds } `
+            }
         }, 1000)
     }
 
@@ -76,13 +88,22 @@ export class Game {
     }
 
     getRandomArbitrary(min:number, max:number) {
-        return Math.floor(Math.random() * (max - min) + min);
+        let random = Math.floor(Math.random() * (max - min) + min);
+        if(this._arr_use_imgs.indexOf(random) === -1) {
+            this._arr_use_imgs.push(random);
+        } else {
+            random = this.getRandomArbitrary(min, max);
+        }
+        return random;
     }
 
     createPairCards() {
         const random_img_number = this.getRandomArbitrary(1, 51);
         const card1 = new Card(random_img_number, random_img_number);
         const card2 = new Card(random_img_number, random_img_number);
+
+        card1.cardActive();
+        card2.cardActive();
 
         this._arr_cards.push(card1);
         this._arr_cards.push(card2);
