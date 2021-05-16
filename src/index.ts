@@ -7,6 +7,15 @@ import { Game } from  "./components/game/game";
 const ROOT = document.querySelector(".root");
 const HEADER = new Header();
 const HOWTOPlAY = new HowToPlay();
-const GAME = new Game(4);
+
+const typesCards = {
+    animals: "animals",
+    web_design: "web-design"
+}
+
+const GAME = new Game(4, typesCards.web_design);
+
+
+
 ROOT.appendChild(HEADER.header);
 ROOT.appendChild(GAME.game);

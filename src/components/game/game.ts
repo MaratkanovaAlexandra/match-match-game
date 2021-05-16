@@ -21,9 +21,11 @@ export class Game {
     private _arr_use_imgs: number[] = [];
     private countCorrectCards:number = 0;
     private timer_wrapper:HTMLElement;
+    private typeCard:string;
     
-    constructor(difficulty:number) {
+    constructor(difficulty:number, typeCard:string) {
         this._difficulty = difficulty;
+        this.typeCard = typeCard;
         this._width_game = this._difficulty;
 
         if (this._difficulty % 2 !== 0) this._height_game = this._difficulty + 1;
@@ -139,8 +141,8 @@ export class Game {
 
     createPairCards() {
         const random_img_number = this.getRandomArbitrary(1, 51);
-        const card1 = new Card(random_img_number, random_img_number);
-        const card2 = new Card(random_img_number, random_img_number);
+        const card1 = new Card(random_img_number, random_img_number, this.typeCard);
+        const card2 = new Card(random_img_number, random_img_number, this.typeCard);
 
         card1.cardActive();
         card2.cardActive();
