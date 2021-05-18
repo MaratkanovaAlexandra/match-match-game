@@ -17,7 +17,7 @@ const typesCards = {
 const ROOT = document.querySelector(".root");
 const HEADER = new Header();
 const HOWTOPlAY = new HowToPlay();
-const GAME = new Game(4, typesCards.web_design);
+const GAME = new Game(8 , typesCards.web_design);
 
 ROOT.appendChild(HEADER.header);
 ROOT.appendChild(GAME.game);

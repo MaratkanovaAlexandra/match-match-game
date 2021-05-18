@@ -1,5 +1,4 @@
-import "./game.scss";
-import { Card } from "../card/card" 
+import { Card } from "../card/card";
 
 const createAndAppendHtmlElement = require( "../../add-element-function");
 
@@ -14,11 +13,11 @@ export class Game {
     private _height_game: number;
 
     private _difficulty: number;
-    private _stop:boolean = false;
+    private _stop = false;
 
-    private _countCorrectCards:number = 0;
-    private _moves:number = 0;
-    private _wrong_moves:number = 0;
+    private _countCorrectCards = 0;
+    private _moves = 0;
+    private _wrong_moves = 0;
 
     private timer_wrapper:HTMLElement;
 
@@ -39,13 +38,13 @@ export class Game {
         this.game = document.createElement("div");
         this.game.classList.add("game");
         
-        this.layoutTimer()
-        this.layoutCards()
+        this.layoutTimer();
+        this.layoutCards();
 
         // Start Game
         this.Game();
     }
-    
+
     private layoutTimer() {
         const timerHTML = createAndAppendHtmlElement(this.game, "div", "game__timer");
         timerHTML.classList.add("timer");
@@ -77,7 +76,7 @@ export class Game {
     private drawCards(parent:HTMLElement) : void {
         let game_row = createAndAppendHtmlElement(parent, "div", "game__row");
         for (let i = 0; i < this._arr_cards.length; i++) {
-            game_row.appendChild(this._arr_cards[i].card)
+            game_row.appendChild(this._arr_cards[i].card);
             if ( (i + 1) % this._width_game === 0 ) {
                 game_row = createAndAppendHtmlElement(parent, "div", "game__row");
             }  
@@ -87,18 +86,18 @@ export class Game {
         setTimeout(() => {
             this.card1 = undefined;
             this.card2 = undefined;
-            this.runTimer(this.timer_wrapper, new Date() )
+            this.runTimer( this.timer_wrapper, new Date() );
             this._arr_cards.map( (card:Card) => {
                 card.cardDeactivat();
-                card.card.addEventListener("click", () => this.onClickCard(card))
-            })
+                card.card.addEventListener("click", () => this.onClickCard(card));
+            });
         }, 10000);
     }
     private runTimer(timerHTML:HTMLElement, time_start:Date) : void {
         setInterval(() => {
             if(!this._stop){
                 const now_time = new Date();
-                const def_time = Math.floor( (now_time.getTime() - time_start.getTime()) / 1000 )
+                const def_time = Math.floor( (now_time.getTime() - time_start.getTime()) / 1000 );
                 
                 this._time.minute = Math.floor( def_time / 60 ) ;
                 this._time.seconds = def_time % 60;
@@ -106,11 +105,11 @@ export class Game {
                 const str_time_minute = String( this._time.minute ).length === 2 ? 
                     String( this._time.minute ) : String( "0" + this._time.minute );
                 const str_time_seconds = String( this._time.seconds ).length === 2 ? 
-                    String( this._time.seconds ) : String( "0" + this._time.seconds )
+                    String( this._time.seconds ) : String( "0" + this._time.seconds );
 
-                timerHTML.innerHTML = `${ str_time_minute }:${ str_time_seconds } `
+                timerHTML.innerHTML = `${ str_time_minute }:${ str_time_seconds } `;
             }
-        }, 1000)
+        }, 1000);
     }
     private getRandomArbitrary(min:number, max:number) : number {
         let random = Math.floor(Math.random() * (max - min) + min);
@@ -124,7 +123,7 @@ export class Game {
     private mixArrCards(array:Card[], countMix:number) {
         for(let c = 0; c < countMix; c++){
             for (let i = (array.length - 1); i > 0; i--) {
-                let j = Math.floor(Math.random() * (i + 1));
+                const j = Math.floor(Math.random() * (i + 1));
                 const temp = array[i];
                 array[i] = array[j];
                 array[j] = temp;
@@ -133,7 +132,6 @@ export class Game {
         return array;
     }
     private onClickCard(card:Card) : void {
-        console.log()
         if( !card.card.classList.contains("correctly")
          && !card.card.classList.contains("error")
          && !card.card.classList.contains("active") ){
@@ -154,7 +152,7 @@ export class Game {
             this._countCorrectCards++;
             if(this._countCorrectCards === this._arr_cards.length / 2){
                 this._stop = true;
-                this.drawWindowWinner()
+                this.drawWindowWinner();
             }
         } else {
             this._wrong_moves++;
@@ -168,7 +166,7 @@ export class Game {
             }, 1500);
         }
         this.card1 = undefined;
-        this.card2 = undefined
+        this.card2 = undefined;
     }
 //// TODO ТУТ ПОЛНАЯ ХРЕНЬ ( пояснение: ибо ссылки быть не должно )
     private drawWindowWinner() : void {
@@ -185,7 +183,7 @@ export class Game {
 
     public get score() : number {
         // (количество сравнений - количество ошибочных сравнений) * 100 - (время прошедшее с начала в секундах) * 10
-        return  (this._moves - this._wrong_moves) * 100 - (this._time.minute * 60 + this._time.seconds) * 10
+        return  (this._moves - this._wrong_moves) * 100 - (this._time.minute * 60 + this._time.seconds) * 10;
     }
     public gamePause() : void {
         this._stop = true;

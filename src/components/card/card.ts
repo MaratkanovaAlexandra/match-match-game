@@ -1,4 +1,3 @@
-import "./card.scss";
 const createAndAppendHtmlElement = require( "../../add-element-function");
 
 export class Card {
@@ -11,26 +10,26 @@ export class Card {
         this.card = document.createElement("div");
         this.card.classList.add("card");
 
-        let cardBack = createAndAppendHtmlElement(this.card, "div", "card__back");
-        cardBack.style.backgroundImage = `url(${require(`./../../assets/game/${typePickture}/${srcImgBack}.png`).default})`
+        const cardBack = createAndAppendHtmlElement(this.card, "div", "card__back");
+        cardBack.style.backgroundImage = `url(${require(`./../../assets/game/${typePickture}/${srcImgBack}.png`).default})`;
         createAndAppendHtmlElement(this.card, "div", "card__front"); 
     }
     
     public get getId() : number {
-        return this._id
+        return this._id;
     }
     
-    cardActive() {
+    cardActive() : void {
         this.card.classList.add("active");
     }
-    cardDeactivat() {
+    cardDeactivat() : void {
         this.card.classList.remove("active");
         this.card.classList.remove("error");
     }
-    cardError(){
+    cardError() : void{
         this.card.classList.add("error");
     }
-    cardCorrectly(){
+    cardCorrectly() : void {
         this.card.classList.add("correctly");
     }
  }
