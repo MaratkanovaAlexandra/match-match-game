@@ -1,7 +1,5 @@
-const createAndAppendHtmlElement =  require( "../../add-element-function");
-import { EntryPlugin } from "webpack";
-import { resolve } from "../../../webpack.config";
-import {Player} from "./../Player"
+import { createAndAppendHtmlElement } from "../../add-element-function";
+import {Player} from "./../Player";
 
 function createInput(parent:HTMLElement, text:string):HTMLInputElement {
     const LABEL =  createAndAppendHtmlElement(parent, "label", "pop_up_window__form_filds_inputs-label");
@@ -56,13 +54,13 @@ export class Registration {
         //draw file input
         this._image = createAndAppendHtmlElement(FILDS, "label", "pop_up_window__form_filds-image");
         this._image_input = createAndAppendHtmlElement(this._image, "input", "pop_up_window__form_filds-file");
-        this._image_input.id = "file_input;"
+        this._image_input.id = "file_input";
         this._image_input.type = "file";
         this._image.htmlFor = "file_input";
 
 
         //draw buttons
-        const BUTTONS = createAndAppendHtmlElement(FORM, "div","pop_up_window__form_buttons" )
+        const BUTTONS = createAndAppendHtmlElement(FORM, "div","pop_up_window__form_buttons" );
         this._submin_button = createAndAppendHtmlElement(BUTTONS, "button","pop_up_window__form_button-blue","Add user");
         this._exit_button = createAndAppendHtmlElement(BUTTONS, "button","pop_up_window__form_button-light","cancel");
         this._submin_button.type = "button";
@@ -93,10 +91,10 @@ export class Registration {
     }
 
     get button():HTMLInputElement {
-        return this._submin_button
+        return this._submin_button;
     } 
 
-    get player():any {
+    get player():Player {
         return this._player;
     } 
 
@@ -118,7 +116,7 @@ export class Registration {
             tooltip = showMistake(INPUT,"name can not contain digits");
             return tooltip;
         }
-        if(!/^[a-zA-Z ]+$/.test(INPUT.value)){
+        if(!/^[a-zа-яA-ZА-Я ]+$/.test(INPUT.value)){
             tooltip = showMistake(INPUT,"name can not contain s.simbols");
             return tooltip;
         }
@@ -148,24 +146,25 @@ export class Registration {
         const image = this._image_input.files[0];
         const reader = new FileReader();
         reader.onload = () => {
-          this._image.style.backgroundImage = `url(${reader.result})`
+          this._image.style.backgroundImage = `url(${reader.result})`;
         };
         reader.readAsDataURL(image);
         this._image_input.value = "";
-        this._image.style.backgroundSize = "auto 163px"
+        this._image.style.backgroundSize = "auto 163px";
     }
 
     private complited():boolean {
-        return /^[a-zAA-z]+$/.test(this._first_name.value) &&
-               /^[a-zAA-z]+$/.test(this._last_name.value) &&
+        return /^[a-zа-яA-ZА-Я]+$/.test(this._first_name.value) &&
+               /^[a-zа-яA-ZА_Я]+$/.test(this._last_name.value) &&
                /^([a-zA-Z0-9_-]+\.)*[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)*\.[a-z]{2,6}$/.test(this._email.value);
     }
 
     private submit() {
-        this._player = new Player(this._first_name.value,this._last_name.value,this._email.value,this._image.style.backgroundImage)
+        this._player = new Player(this._first_name.value,this._last_name.value,
+            this._email.value,this._image.style.backgroundImage);
     }
 
     private clean() {
-        document.body.removeChild(this._pop_up)
+        document.body.removeChild(this._pop_up);
     }
 } 

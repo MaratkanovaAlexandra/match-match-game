@@ -1,6 +1,6 @@
 import { Card } from "../card/card";
 
-const createAndAppendHtmlElement = require( "../../add-element-function");
+import { createAndAppendHtmlElement } from "../../add-element-function";
 
 export class Game {
     game: HTMLElement;
