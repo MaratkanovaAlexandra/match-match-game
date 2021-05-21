@@ -20,20 +20,14 @@
    }
   .card__front {
     position: relative;
-    background: url('../../assets/game/front_card.png') center no-repeat;
+    background: url(../assets/game/front_card.png) 100% 100% no-repeat;
   }
   .card__back {
-    background-image: url();
     background-position: center;
     background-repeat: no-repeat;
     transform: rotateY(180deg);
   }
-  // .card:hover .card__front {
-  //   transform: rotateY(180deg);
-  // }
-  // .card:hover .card__back {
-  //   transform: rotateY(360deg);
-  // }
+
   .active .card__front {
     transform: rotateY(180deg);
   }
@@ -52,7 +46,7 @@
     border-radius: 4px;
   }
   .error .card__back::before {
-    content: url(../../assets/game/error.svg);
+    content: url(../assets/game/error.svg);
     position: absolute;
     top: 0;
     left: 100%;
@@ -73,7 +67,7 @@
   }
 
   .correctly .card__back::before {
-    content: url(../../assets/game/correctly.svg);
+    //content: url(../assets/game/correctly.svg);
     position: absolute;
     top: 0;
     left: 100%;
