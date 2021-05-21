@@ -1,4 +1,4 @@
-const createAndAppendHtmlElement = require( "../../add-element-function");
+import { createAndAppendHtmlElement } from "../../add-element-function";
 
 export class Card {
     card: HTMLElement;

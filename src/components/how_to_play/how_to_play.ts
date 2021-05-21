@@ -1,4 +1,4 @@
-import { createAndAppendHtmlElement }from "../../add-element-function";
+import { createAndAppendHtmlElement } from "../../add-element-function";
 
 export class HowToPlay {
     howtoplay: HTMLElement;
