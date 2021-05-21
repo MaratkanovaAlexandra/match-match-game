@@ -1,5 +1,4 @@
 import "./styles/main.scss";
-const createAndAppendHtmlElement =  require( "./add-element-function");
 
 import {Player} from "./components/Player";
 import {Registration} from "./components/registration/registration";
@@ -17,7 +16,6 @@ const typesCards = {
 const ROOT = document.querySelector(".root");
 const HEADER = new Header();
 const HOWTOPlAY = new HowToPlay();
-const GAME = new Game(4, typesCards.web_design);
 
 ROOT.appendChild(HEADER.header);
-ROOT.appendChild(GAME.game);
+ROOT.appendChild(HOWTOPlAY.howtoplay);
