@@ -1,4 +1,6 @@
 import { createAndAppendHtmlElement } from "../../add-element-function";
+
+import { Header } from "./../header/header";
 import {Player} from "./../Player";
 
 function createInput(parent:HTMLElement, text:string):HTMLInputElement {
@@ -30,7 +32,9 @@ export class Registration {
     private _lname_tooltip:HTMLElement = null;
     private _email_tooltip:HTMLElement = null;
     private _player:Player;
-    constructor() {
+    private _header: Header;
+    constructor(header:Header) {
+        this._header = header
         this._pop_up = document.createElement("section");
         this._pop_up.classList.add("pop_up");
 
@@ -88,18 +92,6 @@ export class Registration {
 
     get pop_up():HTMLElement {
         return this._pop_up;
-    }
-
-    get button():HTMLInputElement {
-        return this._submin_button;
-    } 
-
-    get player():Player {
-        return this._player;
-    } 
-
-    get comlite():boolean {
-        return this.complited();
     }
 
     private validate_name_input(INPUT:HTMLInputElement, tooltip:HTMLElement) {
@@ -162,6 +154,21 @@ export class Registration {
     private submit() {
         this._player = new Player(this._first_name.value,this._last_name.value,
             this._email.value,this._image.style.backgroundImage);
+        this._header.player = this._player;
+        
+        this._header.items.removeChild(this._header.items.lastChild);
+            
+        if(this._header.stopButton.style.display !== "none"){
+            this._header.stopButton.style.display = "none";  
+        }
+        
+        this._header.gameButton.style.display = "block";
+        const IMAGE = createAndAppendHtmlElement(this._header.items, "div", "header__image");
+        if(this._player.image === "") {
+            IMAGE.style.backgroundSize = "49px 49px";
+            return;
+         }
+        IMAGE.style.backgroundImage = this._player.image;
     }
 
     private clean() {
