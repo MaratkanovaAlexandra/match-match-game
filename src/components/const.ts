@@ -21,4 +21,9 @@ export class Const {
   static inputNameMessegeSpSimbols = "name can not contain s.simbols";
   static inputEmailMessegeEmpty = "email can not be empty";
   static inputEmailMessegeNotEmail = "it's not an email";
+
+  //after game
+  static afterGameHead = "You WIN!";
+  static afterGameAddPlayer  = "Add user";
+  static afterGameClose = "cancel";
 }

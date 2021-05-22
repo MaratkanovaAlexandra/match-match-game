@@ -185,6 +185,7 @@ export class Game {
 
         window_winner__btn.addEventListener("click", () => { 
            const AFTERGAME = new AfterGame(this._header);
+           AFTERGAME.init();
            document.body.appendChild(AFTERGAME.pop_up);
         });
     }
