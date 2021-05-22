@@ -59,26 +59,25 @@ export class Header {
     return this._items;
   }
   get gameButton():HTMLElement {
-    return this._game_button
+    return this._game_button;
   }
-  set gameButton(value) {
+  set gameButton(value:HTMLElement) {
     this._game_button = value;
   }
   get stopButton():HTMLElement {
-    return this._stop_button
+    return this._stop_button;
   }
-  set stopButton(value) {
+  set stopButton(value:HTMLElement) {
     this._stop_button = value;
   }
   get regButton():HTMLElement {
-    return this._register_button
+    return this._register_button;
   }
  
 
-  drawPlayer() {
+  drawPlayer():void {
     const REGISTRATION = new Registration(this);
     document.body.appendChild(REGISTRATION.pop_up);
-    
   }
   
   private drawGame() {

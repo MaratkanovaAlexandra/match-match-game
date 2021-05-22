@@ -34,7 +34,7 @@ export class Registration {
     private _player:Player;
     private _header: Header;
     constructor(header:Header) {
-        this._header = header
+        this._header = header;
         this._pop_up = document.createElement("section");
         this._pop_up.classList.add("pop_up");
 

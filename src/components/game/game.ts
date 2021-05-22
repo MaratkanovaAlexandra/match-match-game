@@ -182,7 +182,6 @@ export class Game {
         createAndAppendHtmlElement(window_winner__window, "div", "window_winner__text", text);
         const window_winner__btn = createAndAppendHtmlElement(window_winner__window, "div", "window_winner__btn","OK");
         this._header.player.score = this.score;
-        console.log(this._header.player.score)
 
         window_winner__btn.addEventListener("click", () => { 
            const AFTERGAME = new AfterGame(this._header);
