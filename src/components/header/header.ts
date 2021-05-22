@@ -44,23 +44,23 @@ export class Header {
     const NAV = createAndAppendHtmlElement(this._items, "nav", "header__nav");
     this._about_game = createAndAppendHtmlElement(NAV, "div", "header__nav_item");
     createAndAppendHtmlElement(this._about_game, "div", "header__nav_item-about-game");
-    createAndAppendHtmlElement(this._about_game, "div", "header__nav_item-text", "About Game");
+    createAndAppendHtmlElement(this._about_game, "div", "header__nav_item-text", Const.aboutGame);
     this._about_game.classList.add("nav-active");
 
     this._top_score= createAndAppendHtmlElement(NAV, "div", "header__nav_item");
     createAndAppendHtmlElement(this._top_score, "div", "header__nav_item-top-score");
-    createAndAppendHtmlElement(this._top_score, "div", "header__nav_item-text", "Best Score");
+    createAndAppendHtmlElement(this._top_score, "div", "header__nav_item-text", Const.topScore);
 
     this._about_game = createAndAppendHtmlElement(NAV, "div", "header__nav_item");
     createAndAppendHtmlElement(this._about_game, "div", "header__nav_item-settings");
-    createAndAppendHtmlElement(this._about_game, "div", "header__nav_item-text", "Game Settings");
+    createAndAppendHtmlElement(this._about_game, "div", "header__nav_item-text", Const.settings);
   }
   private createButtons() {
-    this._game_button =createAndAppendHtmlElement(this._items, "button", "header__button", "Start Game");
-    this._stop_button =createAndAppendHtmlElement(this._items, "button", "header__button", "Stop Game");
+    this._game_button =createAndAppendHtmlElement(this._items, "button", "header__button", Const.startButton);
+    this._stop_button =createAndAppendHtmlElement(this._items, "button", "header__button", Const.stopButton);
     this._game_button.id = "game_button";
     this._stop_button.id = "stop_button";
-    this._register_button =createAndAppendHtmlElement(this._items, "button", "header__button", "register new player");
+    this._register_button =createAndAppendHtmlElement(this._items, "button", "header__button", Const.regButton);
 
     this._register_button.addEventListener("click",() => this.drawPlayer());
     this._game_button.addEventListener("click",() => this.drawGame());
@@ -92,6 +92,7 @@ export class Header {
 
   drawPlayer():void {
     const REGISTRATION = new Registration(this);
+    REGISTRATION.init();
     document.body.appendChild(REGISTRATION.pop_up);
   }
   

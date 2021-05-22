@@ -1,11 +1,24 @@
 export class Const {
   //header
   static match = "match";
-  static about_game = "About Game";
-  static top_score = "Best Score";
+  static aboutGame = "About Game";
+  static topScore = "Best Score";
   static settings = "Game Settings";
-  static reg_button = "Register New Player";
-  static start_button = "Start Game";
-  static stop_button = "Stop Game";
-  static cont_button = "Continue Game";
+  static regButton = "Register New Player";
+  static startButton = "Start Game";
+  static stopButton = "Stop Game";
+  static contButton = "Continue Game";
+
+  //registration
+  static popUpHead = "Registr new Player";
+  static inputFirstName = "First Name";
+  static inputLastName = "Last Name";
+  static inputEmail = "E-mail";
+  static addBUtton = "Add user";
+  static closeButton = "cancel";
+  static inputNameMessegeEmpty = "name can not be empty";
+  static inputNameMessegeDigits = "name can not contain digits";
+  static inputNameMessegeSpSimbols = "name can not contain s.simbols";
+  static inputEmailMessegeEmpty = "email can not be empty";
+  static inputEmailMessegeNotEmail = "it's not an email";
 }
