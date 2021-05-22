@@ -1,3 +1,4 @@
+import { Const } from "./../const";
 import { Game } from "../game/game";
 import { Player } from "./../Player";
 import { Registration } from "./../registration/registration";
@@ -19,15 +20,27 @@ export class Header {
   private _stop_button: HTMLElement;
   private _items: HTMLElement;
   constructor() {
+  }
+  
+  public init() {
+    this.createHeader();
+    this.createIcon();
+    this.createNav();
+    this.createButtons();
+  }
+
+  private createHeader() {
     this._header = document.createElement("header");
     this._header.classList.add("header");
 
     this._items = createAndAppendHtmlElement(this._header,"div","header__wrapper");
-
+  }
+  private createIcon() {
     const LOGO = createAndAppendHtmlElement(this._items, "div","header__logo");
-    createAndAppendHtmlElement(LOGO,"div","header__logo-item1", "match");
-    createAndAppendHtmlElement(LOGO,"div","header__logo-item2", "match");
-
+    createAndAppendHtmlElement(LOGO,"div","header__logo-item1", Const.match);
+    createAndAppendHtmlElement(LOGO,"div","header__logo-item2", Const.match);
+  }
+  private createNav() {
     const NAV = createAndAppendHtmlElement(this._items, "nav", "header__nav");
     this._about_game = createAndAppendHtmlElement(NAV, "div", "header__nav_item");
     createAndAppendHtmlElement(this._about_game, "div", "header__nav_item-about-game");
@@ -41,7 +54,8 @@ export class Header {
     this._about_game = createAndAppendHtmlElement(NAV, "div", "header__nav_item");
     createAndAppendHtmlElement(this._about_game, "div", "header__nav_item-settings");
     createAndAppendHtmlElement(this._about_game, "div", "header__nav_item-text", "Game Settings");
-
+  }
+  private createButtons() {
     this._game_button =createAndAppendHtmlElement(this._items, "button", "header__button", "Start Game");
     this._stop_button =createAndAppendHtmlElement(this._items, "button", "header__button", "Stop Game");
     this._game_button.id = "game_button";
@@ -51,7 +65,8 @@ export class Header {
     this._register_button.addEventListener("click",() => this.drawPlayer());
     this._game_button.addEventListener("click",() => this.drawGame());
   }
-  
+
+
   get header():HTMLElement {
     return this._header;
   }

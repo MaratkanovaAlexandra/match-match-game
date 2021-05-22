@@ -6,6 +6,7 @@ import { HowToPlay } from "./components/how_to_play/how_to_play";
 
 const ROOT = document.querySelector(".root");
 const HEADER = new Header();
+HEADER.init();
 const HOWTOPlAY = new HowToPlay();
 
 
