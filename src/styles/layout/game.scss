@@ -1,0 +1,97 @@
+.game {
+    max-width: 1440px;
+    margin: 33px auto 0 auto;
+    padding: 27px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    &__timer {
+        margin: 0 0 33px 0;
+    }
+    &__wrapper {
+        display: flex;
+
+    }
+    &__row {
+
+    }
+}
+.timer {
+    width: 255px;
+    height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24);
+
+    &__wrapper {
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 36px;
+        line-height: 30px;
+        /* or 83% */
+        display: flex;
+        align-items: center;
+        text-align: center;
+        letter-spacing: 0.15px;
+
+        color: rgba(0, 0, 0, 0.4);
+    }
+}
+
+.window_winner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &__window {
+        width: 360px;
+        height: 112px;
+        background: #FFFFFF;
+        padding: 20px 16px 7px 16px;
+    }
+    &__text {
+        padding-right: 30px;
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 20px;
+
+        letter-spacing: 0.25px;
+
+        color: rgba(0, 0, 0, 0.6);
+    }
+    &__btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 12px auto 0 auto;
+        width: 53px;
+        height: 36px;
+        background: #2196F3;
+        box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.12), 0px 2px 2px rgba(0, 0, 0, 0.24);
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    &__btn:hover {
+        background: #367bb4;
+    }
+    &__link {
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 16px;
+        text-decoration: none;
+        color: white;
+    }
+}

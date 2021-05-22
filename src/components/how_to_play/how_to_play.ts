@@ -1,5 +1,4 @@
-import "./how_to_play.scss";
-const createAndAppendHtmlElement =  require( "../../add-element-function");
+import { createAndAppendHtmlElement } from "../../add-element-function";
 
 export class HowToPlay {
     howtoplay: HTMLElement;
@@ -21,8 +20,5 @@ export class HowToPlay {
         createAndAppendHtmlElement(howtoplay__step_third, "div", "step__text", "Start you new game! Remember card positions and match it before times up.");
 
         const howtoplay__column2 = createAndAppendHtmlElement(howtoplay__wrapper, "div", "howtoplay__column");
-        const img1 = createAndAppendHtmlElement(howtoplay__column2, "div", "howtoplay__img-reg");
-        const img2 = createAndAppendHtmlElement(howtoplay__column2, "div", "howtoplay__img-set");
-        const img3 = createAndAppendHtmlElement(howtoplay__column2, "div", "howtoplay__img-game");
     }
 }
