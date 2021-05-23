@@ -1,0 +1,78 @@
+.bestScore__wrapper {
+  max-width: 1000px;
+  height: 754px;
+  margin: 33px auto 0 auto;
+  padding: 48px 98px 0 56px;
+  background: $background;
+
+  &_header {
+    @include uptext;
+  }
+}
+.player_item {
+  display: flex;
+  align-items: flex-end;
+
+  margin-top: 21px;
+  height: 40px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba($color: #212121, $alpha: 0.08);
+}
+
+.player_image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-image: url(../assets/images/avatar.png);
+  background-color: #fafafa;
+  background-position: center;
+  background-size: auto 40px;
+}
+
+.player_data {
+  flex: 85% 0 1;
+  padding-left: 16px;
+  &_name,
+  &_email {
+    font-family: "Roboto";
+    color: #333333;
+
+    margin: 0;
+  }
+
+  &_name {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 21px;
+
+    letter-spacing: 0.1px;
+    text-transform: capitalize;
+  }
+
+  &_email {
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 15px;
+
+    letter-spacing: 0.4px;
+  }
+}
+
+.player_score {
+  padding: 0 15px;
+  @include center;
+  flex-direction: row;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+
+  letter-spacing: 0.15px;
+  &-text {
+    padding-right: 10px;
+  }
+  &-number {
+    color: $blue;
+  }
+}

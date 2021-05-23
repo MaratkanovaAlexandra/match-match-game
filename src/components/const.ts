@@ -26,4 +26,7 @@ export class Const {
   static afterGameHead = "You WIN!";
   static afterGameAddPlayer  = "Add user";
   static afterGameClose = "cancel";
+
+  //best players
+  
 }

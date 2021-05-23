@@ -67,41 +67,29 @@ export class AfterGame {
         this._header.header.parentElement.appendChild(HOWTOPlAY.howtoplay);
     }
 
-    private async addToDB(player:Player) {
+    private addToDB(player:Player) {
         let request = indexedDB.open("score", 1);
 
         request.onupgradeneeded  = () => {
           const db = request.result;
-          const res = db.createObjectStore("players",{keyPath: "score"});
-          const authorIndex = res.createIndex("by_firstName", "firstName");
-          
-          res.put({firstName: "Nicci", lastName: "Troiani", email: "nicci@gmail.com", score: 456, image: ""});
-          res.put({firstName: "Jane", lastName: "Doe", email: "jane.doe@gmail.com", score: 169,  image: ""});
-          res.put({firstName: "Jones", lastName: "Dermot", email: "dermot@gamil.com", score: 211, image: ""});
-          res.put({firstName: "George", lastName: "Fields", email: "jack@gmail.com", score: 358, image: ""});
+          const restonce = db.createObjectStore("players",{keyPath: "score"});
+          const authorIndex = restonce.createIndex("by_firstName", "firstName");
         }
         
         request.onsuccess = function() {
             const db = request.result;
             const objectStore = db.transaction("players",'readwrite').objectStore("players");
             const names = objectStore.index("by_firstName")
-            /* const res = objectStore.getAll();
-            res.onsuccess = function() {
-                console.log(res.result.reverse());
-            };*/
-            const r = names.get(player.firstName);
-            r.onsuccess = () => {
-                const res = r.result;
-                if (res !== undefined && res.lastName === player.lastName && res.email === player.email
-                    && res.image === player.image ) {
-                        if (res.score > player.score) return;
-                    objectStore.delete(res.score);
+
+            const result = names.get(player.firstName);
+            result.onsuccess = () => {
+                const restonce = result.result;
+                if (restonce !== undefined && restonce.lastName === player.lastName && restonce.email === player.email
+                    && restonce.image === player.image ) {
+                        if (restonce.score > player.score) return;
+                    objectStore.delete(restonce.score);
                 }
-                objectStore.put({firstName: player.firstName, 
-                    lastName: player.lastName,
-                    email: player.email, 
-                    score: player.score,
-                   image:  player.image});
+                objectStore.put(player);
             }
             
         }
