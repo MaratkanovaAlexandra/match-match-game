@@ -2,7 +2,7 @@ import { Const } from "./const";
 import { createAndAppendHtmlElement } from "../add-element-function";
 
 import { Header } from "./header/header";
-import { HowToPlay } from "./how_to_play/how_to_play";
+import { BestScore } from "./best-score" 
 import { Player } from "./Player";
        
 
@@ -61,10 +61,13 @@ export class AfterGame {
         this.addToDB(this._header.player)
         document.body.removeChild(this._pop_up);
         document.body.firstChild.removeChild( document.body.firstChild.lastChild);
-        const HOWTOPlAY = new HowToPlay();
+        const BEST = new BestScore();
+        BEST.init();
+
         this._header.stopButton.style.display = "none";
         this._header.gameButton.style.display = "block";
-        this._header.header.parentElement.appendChild(HOWTOPlAY.howtoplay);
+
+        this._header.header.parentElement.appendChild(BEST.bestScore);
     }
 
     private addToDB(player:Player) {

@@ -28,5 +28,6 @@ export class Const {
   static afterGameClose = "cancel";
 
   //best players
-  
+  static bestPlayers = "Best players";
+  static score = "Score:"; 
 }

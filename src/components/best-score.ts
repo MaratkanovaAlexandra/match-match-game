@@ -1,4 +1,5 @@
 import { createAndAppendHtmlElement } from "../add-element-function";
+import { Const } from "./const";
 import { Player } from "./Player";
 
 export class BestScore {
@@ -18,7 +19,7 @@ export class BestScore {
     }
 
     private createHeader() {
-        createAndAppendHtmlElement(this._wrapper,"div","bestScore__wrapper_header","Best players")
+        createAndAppendHtmlElement(this._wrapper,"div","bestScore__wrapper_header",Const.bestPlayers)
     }
 
 
@@ -37,6 +38,7 @@ export class BestScore {
             const res = objectStore.getAll();
             res.onsuccess = () => {
                 const result = res.result.reverse().slice(0,10);
+                console.log(result)
                 result.forEach((item) => this.createPlayer(item))
             };
         }
@@ -53,16 +55,17 @@ export class BestScore {
         IMAGE.style.marginLef = "0";
         if(player.image === "") {
             IMAGE.style.backgroundSize = "49px 49px";
-            return;
-         }
-        IMAGE.style.backgroundImage = player.image;
+        } else {
+            IMAGE.style.backgroundImage = player.image;
+        }
+        
 
         const NAME = createAndAppendHtmlElement(ELEMENT, "div", "player_data");
         createAndAppendHtmlElement(NAME, "p", "player_data_name",`${player.firstName} ${player.lastName}`);
         createAndAppendHtmlElement(NAME, "p", "player_data_email",`${player.email}`);
 
         const SCORE = createAndAppendHtmlElement(ELEMENT, "div", "player_score");
-        createAndAppendHtmlElement(SCORE,"p","player_score-text",`Score: `);
+        createAndAppendHtmlElement(SCORE,"p","player_score-text",Const.score);
         createAndAppendHtmlElement(SCORE,"span","player_score-number",`${player.score}`);
     }
 

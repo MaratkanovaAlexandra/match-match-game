@@ -2,17 +2,14 @@ import "./styles/main.scss";
 
 import { Header } from "./components/header/header";
 import { HowToPlay } from "./components/how_to_play/how_to_play";
-import { BestScore } from "./components/best-score"
 
 const ROOT = document.querySelector(".root");
 const HEADER = new Header();
 HEADER.init();
-//const HOWTOPlAY = new HowToPlay();
-const BEST = new BestScore();
-BEST.init()
+const HOWTOPlAY = new HowToPlay();
+
 
 ROOT.appendChild(HEADER.header);
-//ROOT.appendChild(HOWTOPlAY.howtoplay);
-ROOT.appendChild(BEST.bestScore)
+ROOT.appendChild(HOWTOPlAY.howtoplay);
 
 
