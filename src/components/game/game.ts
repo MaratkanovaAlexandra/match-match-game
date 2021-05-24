@@ -24,6 +24,7 @@ export class Game {
     private _wrong_moves = 0;
 
     private timer_wrapper:HTMLElement;
+    private game__wrapper:HTMLElement;
 
     private typeCard:string;
     private _arr_use_imgs: number[] = [];
@@ -64,8 +65,8 @@ export class Game {
         for(let j = 0; j < countCards; j++)  this.createPairCards();
         this._arr_cards = this.mixArrCards(this._arr_cards, 5);
 
-        const game_wrapper = createAndAppendHtmlElement(this.game, "div", "game__wrapper");
-        this.drawCards(game_wrapper);
+        this.game__wrapper = createAndAppendHtmlElement(this.game, "div", "game__wrapper");
+        this.drawCards( this.game__wrapper );
     }
 
     private createPairCards() : void {
@@ -80,10 +81,12 @@ export class Game {
         this._arr_cards.push(card2);
     }
     private drawCards(parent:HTMLElement) : void {
+        console.log(this._width_game)
         let game_row = createAndAppendHtmlElement(parent, "div", "game__row");
         for (let i = 0; i < this._arr_cards.length; i++) {
             game_row.appendChild(this._arr_cards[i].card);
-            if ( (i + 1) % this._width_game === 0 ) {
+            if ( (i + 1) % this._width_game === 0 &&  i + 1 !== this._arr_cards.length) {
+                console.log(i);
                 game_row = createAndAppendHtmlElement(parent, "div", "game__row");
             }  
         }
@@ -176,9 +179,12 @@ export class Game {
     }
 //// TODO ТУТ ПОЛНАЯ ХРЕНЬ ( пояснение: ибо ссылки быть не должно )
     private drawWindowWinner() : void {
-        const window_winner = createAndAppendHtmlElement(this.game, "div", "window_winner");
+        const window_winner = createAndAppendHtmlElement(document.body, "div", "window_winner");
         const window_winner__window = createAndAppendHtmlElement(window_winner, "div", "window_winner__window");
-        const text = `Congratulations! You successfully found all matches on ${(this._time.minute * 60 + this._time.seconds) / 60} minutes.`;
+        const text = `Congratulations! You successfully found all matches on ${this._time.minute }.${
+            String( this._time.seconds ).length === 2 ? 
+            String( this._time.seconds ) : String( "0" + this._time.seconds )
+        }`;
         createAndAppendHtmlElement(window_winner__window, "div", "window_winner__text", text);
         const window_winner__btn = createAndAppendHtmlElement(window_winner__window, "div", "window_winner__btn","OK");
         this._header.player.score = this.score;
@@ -196,8 +202,10 @@ export class Game {
     }
     public gamePause() : void {
         this._stop = true;
+        this.game__wrapper.classList.add("game__wrapper--lock");
     }
     public gameStart() : void {
         this._stop = false;
+        this.game__wrapper.classList.remove("game__wrapper--lock");
     }
 }

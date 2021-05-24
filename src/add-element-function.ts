@@ -8,8 +8,8 @@
  * @return {HTMLElement}
  *
  */
- export function createAndAppendHtmlElement(appendElement: HTMLElement, typeElement: string, 
-  classElement?: string, value?: string): any {
+export function createAndAppendHtmlElement(appendElement: HTMLElement, typeElement: string, 
+  classElement?: string, value?: string) : any{
   const element = document.createElement(typeElement);
   if (typeof classElement !== "undefined") element.classList.add(classElement);
   if (typeof value !== "undefined") element.innerText = value;
