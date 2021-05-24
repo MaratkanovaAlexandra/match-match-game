@@ -58,7 +58,9 @@ export class AfterGame {
     }
 
     private close() {
-        this.addToDB(this._header.player)
+        this.addToDB(this._header.player);
+        this._header.topScore.classList.add("nav-active")
+
         document.body.removeChild(this._pop_up);
         document.body.firstChild.removeChild( document.body.firstChild.lastChild);
         const BEST = new BestScore();

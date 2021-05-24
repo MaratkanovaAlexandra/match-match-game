@@ -12,13 +12,20 @@ const typesCards = {
 
 export class Header {
   private _header: HTMLElement;
+  private _nav:HTMLElement;
+  private _items: HTMLElement;
+
   private _register_button: HTMLElement;
   private _about_game: HTMLElement;
   private _top_score: HTMLElement;
+
   player:Player;
+
   private _game_button: HTMLElement;
   private _stop_button: HTMLElement;
-  private _items: HTMLElement;
+  private _settings: HTMLElement;
+
+  private _game:Game;
   constructor() {
   }
   
@@ -27,6 +34,11 @@ export class Header {
     this.createIcon();
     this.createNav();
     this.createButtons();
+    this._header.addEventListener("click", () => {
+      if(event.target === this._register_button)  this.drawPlayer();
+      if(event.target === this._game_button) this.drawGame();
+      if(event.target === this._stop_button) this.stopGame();
+    })
   }
 
   private createHeader() {
@@ -41,19 +53,19 @@ export class Header {
     createAndAppendHtmlElement(LOGO,"div","header__logo-item2", Const.match);
   }
   private createNav() {
-    const NAV = createAndAppendHtmlElement(this._items, "nav", "header__nav");
-    this._about_game = createAndAppendHtmlElement(NAV, "div", "header__nav_item");
+    this._nav = createAndAppendHtmlElement(this._items, "nav", "header__nav");
+    this._about_game = createAndAppendHtmlElement(this._nav, "div", "header__nav_item");
     createAndAppendHtmlElement(this._about_game, "div", "header__nav_item-about-game");
     createAndAppendHtmlElement(this._about_game, "div", "header__nav_item-text", Const.aboutGame);
     this._about_game.classList.add("nav-active");
 
-    this._top_score= createAndAppendHtmlElement(NAV, "div", "header__nav_item");
+    this._top_score= createAndAppendHtmlElement(this._nav, "div", "header__nav_item");
     createAndAppendHtmlElement(this._top_score, "div", "header__nav_item-top-score");
     createAndAppendHtmlElement(this._top_score, "div", "header__nav_item-text", Const.topScore);
 
-    this._about_game = createAndAppendHtmlElement(NAV, "div", "header__nav_item");
-    createAndAppendHtmlElement(this._about_game, "div", "header__nav_item-settings");
-    createAndAppendHtmlElement(this._about_game, "div", "header__nav_item-text", Const.settings);
+    this._settings = createAndAppendHtmlElement(this._nav, "div", "header__nav_item");
+    createAndAppendHtmlElement(this._settings, "div", "header__nav_item-settings");
+    createAndAppendHtmlElement(this._settings, "div", "header__nav_item-text", Const.settings);
   }
   private createButtons() {
     this._game_button =createAndAppendHtmlElement(this._items, "button", "header__button", Const.startButton);
@@ -61,9 +73,6 @@ export class Header {
     this._game_button.id = "game_button";
     this._stop_button.id = "stop_button";
     this._register_button =createAndAppendHtmlElement(this._items, "button", "header__button", Const.regButton);
-
-    this._register_button.addEventListener("click",() => this.drawPlayer());
-    this._game_button.addEventListener("click",() => this.drawGame());
   }
 
 
@@ -73,22 +82,33 @@ export class Header {
   get items():HTMLElement {
     return this._items;
   }
+
+  get aboutGame():HTMLElement {
+    return this._about_game;
+  }
+  get topScore():HTMLElement {
+    return this._top_score;
+  }
+  get settings():HTMLElement {
+    return this._settings;
+  }
+
+
   get gameButton():HTMLElement {
     return this._game_button;
-  }
-  set gameButton(value:HTMLElement) {
-    this._game_button = value;
   }
   get stopButton():HTMLElement {
     return this._stop_button;
   }
-  set stopButton(value:HTMLElement) {
-    this._stop_button = value;
-  }
   get regButton():HTMLElement {
     return this._register_button;
   }
- 
+
+  removeActiveNav() {
+    Array.from(this._nav.children).forEach(element => {
+      element.classList.remove("nav-active");
+  });
+  }
 
   drawPlayer():void {
     const REGISTRATION = new Registration(this);
@@ -97,10 +117,20 @@ export class Header {
   }
   
   private drawGame() {
+    this.removeActiveNav();
     this._game_button.style.display = "none";
     this._stop_button.style.display = "block";
     this._header.parentElement.removeChild(this._header.parentElement.lastChild);
-    const GAME = new Game(this, 4, typesCards.web_design);
-    this._header.parentElement.appendChild(GAME.game);
+    this._game= new Game(this, 4, typesCards.web_design);
+    this._header.parentElement.appendChild(this._game.game);
+  }
+  private stopGame() {
+    if(this._stop_button.innerHTML === Const.stopButton) {
+      this._game.gamePause();
+      this._stop_button.innerHTML = Const.contButton;
+      return;
+    }
+    this._game.gameStart();
+    this._stop_button.innerHTML = Const.stopButton;
   }
 }

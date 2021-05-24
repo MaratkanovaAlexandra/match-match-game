@@ -190,6 +190,7 @@ export class Game {
         this._header.player.score = this.score;
 
         window_winner__btn.addEventListener("click", () => { 
+            document.body.removeChild(document.body.lastChild);
            const AFTERGAME = new AfterGame(this._header);
            AFTERGAME.init();
            document.body.appendChild(AFTERGAME.pop_up);

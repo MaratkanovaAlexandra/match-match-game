@@ -79,7 +79,7 @@
             font-family: "Roboto";
             font-style: normal;
             font-weight: normal;
-            font-size: 12px;
+            font-size: 0.75rem;
             line-height: 16px;
             letter-spacing: 0.4px;
             color: rgba(0, 0, 0, 0.38);
@@ -89,13 +89,13 @@
             border: none;
             outline: none;
             height: 22px;
-            width: 14rem;
+            width: 90%;
             padding: 0;
 
             font-family: "Roboto";
             font-style: normal;
             font-weight: normal;
-            font-size: 16px;
+            font-size: 1rem;
             line-height: 24px;
             letter-spacing: 0.15px;
             color: rgba(0, 0, 0, 0.87);
@@ -151,14 +151,7 @@
         height: 36px;
         @include center;
 
-        font-family: "Roboto";
-        font-style: normal;
-        font-weight: 500;
-        font-size: 14px;
-        line-height: 16px;
-
-        letter-spacing: 1.25px;
-        text-transform: uppercase;
+        @include buttonText;
 
         box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.12),
           0px 2px 2px rgba(0, 0, 0, 0.24);
@@ -191,7 +184,7 @@
     .tooltip {
       position: relative;
       bottom: -3px;
-      width: 17rem;
+      width: 90%;
       color: rgb(155, 59, 59);
       background: #ffffff;
       z-index: 5;
@@ -205,7 +198,7 @@
       font-family: "Roboto";
       font-style: normal;
       font-weight: 300;
-      font-size: 14px;
+      font-size: 0.875rem;
       line-height: 16px;
 
       text-transform: uppercase;
