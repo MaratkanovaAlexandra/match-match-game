@@ -1,4 +1,4 @@
-import { Const } from "./../const";
+import * as Const from "./../const";
 import { Game } from "../game/game";
 import { Player } from "./../Player";
 import { Registration } from "./../registration/registration";

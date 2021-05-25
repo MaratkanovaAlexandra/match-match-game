@@ -1,4 +1,4 @@
-import { Const } from "./../const";
+import * as Const from "./../const";
 import { createAndAppendHtmlElement } from "../../add-element-function";
 
 import { Header } from "./../header/header";
@@ -42,7 +42,24 @@ export class Registration {
         this.createPopUp();
         this.createPopUpHeader();
         this.createForm();
-        this.addEvents();
+
+        this._pop_up.addEventListener("input", () => {
+            if (event.target === this._first_name)
+                this._fname_tooltip = this.validate_name_input(this._first_name,this._fname_tooltip);
+            if ( event.target === this._last_name)
+                this._lname_tooltip = this.validate_name_input(this._last_name,this._lname_tooltip);
+            if ( event.target === this._email) this.validate_email_input();
+            if ( event.target === this._image_input) this.imageLoad();
+        });
+        
+        this._pop_up.addEventListener("click", () => {
+            if (event.target === this._submin_button){
+                if(!this.complited()) return;
+                this.submit();
+                this.clean();
+            }
+            if (event.target === this._exit_button) this.clean();
+        });
     }
 
     private createPopUp() {
@@ -80,26 +97,6 @@ export class Registration {
         this._exit_button = createAndAppendHtmlElement(BUTTONS, "button","pop_up_window__form_button-light", Const.closeButton);
         this._submin_button.type = "button";
         this._exit_button.type = "button";
-    }
-
-    private addEvents() {
-        this._first_name.addEventListener("input",() => {
-            this._fname_tooltip = this.validate_name_input(this._first_name,this._fname_tooltip);
-         });
- 
-         this._last_name.addEventListener("input",() => {
-             this._lname_tooltip = this.validate_name_input(this._last_name,this._lname_tooltip);
-         });
- 
-         this._email.addEventListener("input",() => this.validate_email_input());
-         this._image_input.addEventListener("input",() => this.imageLoad());       
- 
-         this._submin_button.addEventListener("click", () => {
-             if(!this.complited()) return;
-             this.submit();
-             this.clean();
-         });
-         this._exit_button.addEventListener("click",() => this.clean());
     }
 
     get pop_up():HTMLElement {

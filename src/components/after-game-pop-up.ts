@@ -1,4 +1,4 @@
-import { Const } from "./const";
+import * as Const from "./const";
 import { createAndAppendHtmlElement } from "../add-element-function";
 
 import { Header } from "./header/header";
@@ -21,6 +21,13 @@ export class AfterGame {
         this.createPopUp();
         this.createPopUpHeader();
         this.createForm();
+        this._pop_up.addEventListener("click", () => {
+            if(event.target === this._submin_button){
+                this._header.drawPlayer();
+                this.close();
+            }
+            if(event.target === this._exit_button) this.close();
+        });
     }
 
     private createPopUp(){
@@ -46,11 +53,7 @@ export class AfterGame {
         this._submin_button = createAndAppendHtmlElement(BUTTONS, "button","pop_up_window__form_button-blue",Const.afterGameAddPlayer);
         this._exit_button = createAndAppendHtmlElement(BUTTONS, "button","pop_up_window__form_button-light",Const.afterGameClose);
 
-        this._submin_button.addEventListener("click", () => {
-            this._header.drawPlayer();
-            this.close();
-        });
-        this._exit_button.addEventListener("click", () => this.close());
+        
     }
 
     get pop_up():HTMLElement {

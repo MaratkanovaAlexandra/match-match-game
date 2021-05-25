@@ -1,5 +1,6 @@
 import { createAndAppendHtmlElement } from "../add-element-function";
-import { Const } from "./const";
+import * as Const from "./const";
+
 import { Player } from "./Player";
 
 export class BestScore {
