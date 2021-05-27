@@ -1,32 +1,31 @@
-  //header
-  export let match = "match";
-  export let aboutGame = "About Game";
-  export let topScore = "Best Score";
-  export let settings = "Game Settings";
-  export let regButton = "Register New Player";
-  export let startButton = "Start Game";
-  export let stopButton = "Stop Game";
-  export let contButton = "Continue Game";
+//header
+export const match = "match";
+export const aboutGame = "About Game";
+export const topScore = "Best Score";
+export const settings = "Game Settings";
+export const regButton = "Register New Player";
+export const startButton = "Start Game";
+export const stopButton = "Stop Game";
+export const contButton = "Continue Game";
 
-  //registration
-  export let popUpHead = "Registr new Player";
-  export let inputFirstName = "First Name";
-  export let inputLastName = "Last Name";
-  export let inputEmail = "E-mail";
-  export let addBUtton = "Add user";
-  export let closeButton = "cancel";
-  export let inputNameMessegeEmpty = "name can not be empty";
-  export let inputNameMessegeDigits = "name can not contain digits";
-  export let inputNameMessegeSpSimbols = "name can not contain s.simbols";
-  export let inputEmailMessegeEmpty = "email can not be empty";
-  export let inputEmailMessegeNotEmail = "it's not an email";
+//registration
+export const popUpHead = "Registr new Player";
+export const inputFirstName = "First Name";
+export const inputLastName = "Last Name";
+export const inputEmail = "E-mail";
+export const addBUtton = "Add user";
+export const closeButton = "cancel";
+export const inputNameMessegeEmpty = "name can not be empty";
+export const inputNameMessegeDigits = "name can not contain digits";
+export const inputNameMessegeSpSimbols = "name can not contain s.simbols";
+export const inputEmailMessegeEmpty = "email can not be empty";
+export const inputEmailMessegeNotEmail = "it's not an email";
 
-  //after game
-  export let afterGameHead = "You WIN!";
-  export let afterGameAddPlayer  = "Add user";
-  export let afterGameClose = "cancel";
+//after game
+export const afterGameHead = "You WIN!";
+export const afterGameAddPlayer = "Add user";
+export const afterGameClose = "cancel";
 
-  //best players
-  export let bestPlayers = "Best players";
-  export let score = "Score:"; 
-
+//best players
+export const bestPlayers = "Best players";
+export const score = "Score:";

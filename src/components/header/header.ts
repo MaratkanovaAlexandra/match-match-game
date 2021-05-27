@@ -7,17 +7,7 @@ import { Registration } from "./../registration/registration";
 import { BestScore } from "../best-score";
 import { HowToPlay } from "../how_to_play/how_to_play";
 import { GameSettings } from "../game settings/game_settings";
-import {settings} from "./../game settings/settings";
-
-
-const typesCards = {
-  animals: "animals",
-  web_design: "web-design"
-}
-const difficulty = {
-  level_two: 8,
-  level_four: 4
-}
+import { settings } from "./../game settings/settings";
 
 export class Header {
   private _header: HTMLElement;
@@ -35,10 +25,9 @@ export class Header {
   private _settings: HTMLElement;
 
   private _game:Game;
-  constructor() {
-  }
+
   
-  public init() {
+  public init():void {
     this.createHeader();
     this.createIcon();
     this.createNav();
@@ -119,7 +108,7 @@ export class Header {
     return this._register_button;
   }
 
-  removeActiveNav() {
+  removeActiveNav() :void {
     Array.from(this._nav.children).forEach(element => {
       element.classList.remove("nav-active");
   });
@@ -136,8 +125,8 @@ export class Header {
     this._game_button.style.display = "none";
     this._stop_button.style.display = "block";
     this._header.parentElement.removeChild(this._header.parentElement.lastChild);
-    this._game= new Game(this,settings.difficulty[settings.activeItems.difficulty].value, 
-      settings.typesCards[settings.activeItems.typesCards].value);
+    this._game= new Game(this, settings.difficulty[settings.activeItems.difficulty].value,
+                               settings.typesCards[settings.activeItems.typesCards].value);
     this._header.parentElement.appendChild(this._game.game);
   }
   private stopGame() {
@@ -180,7 +169,6 @@ export class Header {
   private toSettings() {
     if (this._settings.classList.contains("nav-active")) return;
     if(this._stop_button.style.display !== "none") {
-      console.log(this._stop_button.style.display)
       this._stop_button.style.display = "none";
       this._game_button.style.display = "block";
     }

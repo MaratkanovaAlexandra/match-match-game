@@ -5,7 +5,12 @@ export class Player {
   score: number;
   image: string;
 
-  constructor(firstName: string, lastName: string, email: string, image:string) {
+  constructor(
+    firstName: string,
+    lastName: string,
+    email: string,
+    image: string
+  ) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
@@ -13,4 +18,3 @@ export class Player {
     this.image = image;
   }
 }
-

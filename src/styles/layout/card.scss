@@ -1,10 +1,10 @@
 .card {
   margin: 12px;
-  width: 168px;
-  height: 168px;
+  //width: 168px;
+  // height: 168px;
   position: relative;
   perspective: 1000px;
-  border: 1px solid #fff;
+  border: 1px solid inherit;
 }
 .card__front,
 .card__back {
@@ -22,6 +22,7 @@
 .card__front {
   position: relative;
   background: url(../assets/game/front_card.png) 100% 100% no-repeat;
+  background-size: cover;
 }
 .card__back {
   background-position: center;
