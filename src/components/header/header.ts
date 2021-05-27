@@ -1,5 +1,6 @@
 import * as Const from "./../const";
 import { Game } from "../game/game";
+import { settings } from "./../game settings/settings"
 import { Player } from "./../Player";
 import { Registration } from "./../registration/registration";
 
@@ -121,7 +122,8 @@ export class Header {
     this._game_button.style.display = "none";
     this._stop_button.style.display = "block";
     this._header.parentElement.removeChild(this._header.parentElement.lastChild);
-    this._game= new Game(this, 4, typesCards.web_design);
+    this._game= new Game(this, settings.difficulty[settings.activeItems.difficulty].value,
+                               settings.typesCards[settings.activeItems.typesCards].value);
     this._header.parentElement.appendChild(this._game.game);
   }
   private stopGame() {

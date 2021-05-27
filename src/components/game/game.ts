@@ -86,7 +86,6 @@ export class Game {
         for (let i = 0; i < this._arr_cards.length; i++) {
             game_row.appendChild(this._arr_cards[i].card);
             if ( (i + 1) % this._width_game === 0 &&  i + 1 !== this._arr_cards.length) {
-                console.log(i);
                 game_row = createAndAppendHtmlElement(parent, "div", "game__row");
             }  
         }
@@ -103,22 +102,29 @@ export class Game {
         }, 10000);
     }
     private runTimer(timerHTML:HTMLElement, time_start:Date) : void {
+        let copy_time_start = time_start;
+        console.log(copy_time_start)
         setInterval(() => {
-            if(!this._stop){
+            if (!this._stop) {
                 const now_time = new Date();
-                const def_time = Math.floor( (now_time.getTime() - time_start.getTime()) / 1000 );
-                
-                this._time.minute = Math.floor( def_time / 60 ) ;
-                this._time.seconds = def_time % 60;
+                const def_time =  Math.floor( (now_time.getTime() - copy_time_start.getTime())/ 1000 );
+                copy_time_start = now_time;
 
+                this._time.seconds += def_time;
+                this._time.minute += Math.floor( this._time.seconds / 60 ) % 60;
+                this._time.seconds = this._time.seconds % 60;
+                
                 const str_time_minute = String( this._time.minute ).length === 2 ? 
                     String( this._time.minute ) : String( "0" + this._time.minute );
                 const str_time_seconds = String( this._time.seconds ).length === 2 ? 
                     String( this._time.seconds ) : String( "0" + this._time.seconds );
 
                 timerHTML.innerHTML = `${ str_time_minute }:${ str_time_seconds } `;
+            } else {
+                const now_time = new Date();
+                copy_time_start = now_time;
             }
-        }, 1000);
+        }, 1020);
     }
     private getRandomArbitrary(min:number, max:number) : number {
         let random = Math.floor(Math.random() * (max - min) + min);
