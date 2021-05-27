@@ -1,4 +1,7 @@
 import { Card } from "../card/card";
+import { AfterGame } from "../after-game-pop-up";
+import { Header } from "./../header/header";
+
 import { createAndAppendHtmlElement } from "../../add-element-function";
 
 export class Game {
@@ -7,6 +10,8 @@ export class Game {
         minute: 0,
         seconds: 0
     };
+
+    private _header:Header;
 
     private _width_game: number;
     private _height_game: number;
@@ -27,7 +32,9 @@ export class Game {
     private card1: Card;
     private card2: Card;
     
-    constructor(difficulty:number, typeCard:string) {
+    constructor(header:Header, difficulty:number, typeCard:string) {
+        this._header = header;
+
         this._difficulty = difficulty;
         this.typeCard = typeCard;
         this._width_game = this._difficulty;
@@ -179,11 +186,15 @@ export class Game {
             String( this._time.seconds ) : String( "0" + this._time.seconds )
         }`;
         createAndAppendHtmlElement(window_winner__window, "div", "window_winner__text", text);
-        const window_winner__btn = createAndAppendHtmlElement(window_winner__window, "div", "window_winner__btn");
-        const window_winner__link = createAndAppendHtmlElement(window_winner__btn, "a", "window_winner__link", "OK");
+        const window_winner__btn = createAndAppendHtmlElement(window_winner__window, "div", "window_winner__btn","OK");
+        this._header.player.score = this.score;
 
-        //TODO САША ПИШИ СЮДА ССЫЛКУ
-        window_winner__link.setAttribute("href", "./");
+        window_winner__btn.addEventListener("click", () => { 
+            document.body.removeChild(document.body.lastChild);
+           const AFTERGAME = new AfterGame(this._header);
+           AFTERGAME.init();
+           document.body.appendChild(AFTERGAME.pop_up);
+        });
     }
 
     public get score() : number {

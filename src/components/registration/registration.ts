@@ -1,7 +1,8 @@
-const createAndAppendHtmlElement =  require( "../../add-element-function");
-import { EntryPlugin } from "webpack";
-import { resolve } from "../../../webpack.config";
-import {Player} from "./../Player"
+import * as Const from "./../const";
+import { createAndAppendHtmlElement } from "../../add-element-function";
+
+import { Header } from "./../header/header";
+import {Player} from "./../Player";
 
 function createInput(parent:HTMLElement, text:string):HTMLInputElement {
     const LABEL =  createAndAppendHtmlElement(parent, "label", "pop_up_window__form_filds_inputs-label");
@@ -32,76 +33,74 @@ export class Registration {
     private _lname_tooltip:HTMLElement = null;
     private _email_tooltip:HTMLElement = null;
     private _player:Player;
-    constructor() {
+    private _header: Header;
+    constructor(header:Header) {
+        this._header = header;
+    }
+
+    public init() {
+        this.createPopUp();
+        this.createPopUpHeader();
+        this.createForm();
+
+        this._pop_up.addEventListener("input", () => {
+            if (event.target === this._first_name)
+                this._fname_tooltip = this.validate_name_input(this._first_name,this._fname_tooltip);
+            if ( event.target === this._last_name)
+                this._lname_tooltip = this.validate_name_input(this._last_name,this._lname_tooltip);
+            if ( event.target === this._email) this.validate_email_input();
+            if ( event.target === this._image_input) this.imageLoad();
+        });
+        
+        this._pop_up.addEventListener("click", () => {
+            if (event.target === this._submin_button){
+                if(!this.complited()) return;
+                this.submit();
+                this.clean();
+            }
+            if (event.target === this._exit_button) this.clean();
+        });
+    }
+
+    private createPopUp() {
         this._pop_up = document.createElement("section");
         this._pop_up.classList.add("pop_up");
 
         this._pop_up__window = createAndAppendHtmlElement(this._pop_up, "div", "pop_up_window");
+    }
 
-        //draw pop-up header
+    private createPopUpHeader() {
         const POP_UP_HEADER = createAndAppendHtmlElement(this._pop_up__window, "div", "pop_up_window__header");
-        createAndAppendHtmlElement(POP_UP_HEADER, "p", "pop_up_window__header-text", "Registr new Player");
+        createAndAppendHtmlElement(POP_UP_HEADER, "p", "pop_up_window__header-text", Const.popUpHead);
+    }
 
-        //draw form 
+    private createForm() {
         const FORM = createAndAppendHtmlElement(this._pop_up__window, "form", "pop_up_window__form");
 
         const FILDS = createAndAppendHtmlElement(FORM, "div", "pop_up_window__form_filds");
         const INPUTS = createAndAppendHtmlElement(FILDS, "div", "pop_up_window__form_filds_inputs");
 
         //draw text inputs
-        this._first_name = createInput(INPUTS,"First Name");
-        this._last_name = createInput(INPUTS,"Last Name");
-        this._email = createInput(INPUTS,"E-mail");
+        this._first_name = createInput(INPUTS,Const.inputFirstName);
+        this._last_name = createInput(INPUTS,Const.inputLastName);
+        this._email = createInput(INPUTS,Const.inputEmail);
 
         //draw file input
         this._image = createAndAppendHtmlElement(FILDS, "label", "pop_up_window__form_filds-image");
         this._image_input = createAndAppendHtmlElement(this._image, "input", "pop_up_window__form_filds-file");
-        this._image_input.id = "file_input;"
+        this._image_input.id = "file_input";
         this._image_input.type = "file";
         this._image.htmlFor = "file_input";
 
-
-        //draw buttons
-        const BUTTONS = createAndAppendHtmlElement(FORM, "div","pop_up_window__form_buttons" )
-        this._submin_button = createAndAppendHtmlElement(BUTTONS, "button","pop_up_window__form_button-blue","Add user");
-        this._exit_button = createAndAppendHtmlElement(BUTTONS, "button","pop_up_window__form_button-light","cancel");
+        const BUTTONS = createAndAppendHtmlElement(FORM, "div","pop_up_window__form_buttons" );
+        this._submin_button = createAndAppendHtmlElement(BUTTONS, "button","pop_up_window__form_button-blue",Const.addBUtton);
+        this._exit_button = createAndAppendHtmlElement(BUTTONS, "button","pop_up_window__form_button-light", Const.closeButton);
         this._submin_button.type = "button";
         this._exit_button.type = "button";
-
-        //input events
-        this._first_name.addEventListener("input",() => {
-           this._fname_tooltip = this.validate_name_input(this._first_name,this._fname_tooltip);
-        });
-
-        this._last_name.addEventListener("input",() => {
-            this._lname_tooltip = this.validate_name_input(this._last_name,this._lname_tooltip);
-        });
-
-        this._email.addEventListener("input",() => this.validate_email_input());
-        this._image_input.addEventListener("input",() => this.imageLoad());       
-
-        this._submin_button.addEventListener("click", () => {
-            if(!this.complited()) return;
-            this.submit();
-            this.clean();
-        });
-        this._exit_button.addEventListener("click",() => this.clean());
     }
 
     get pop_up():HTMLElement {
         return this._pop_up;
-    }
-
-    get button():HTMLInputElement {
-        return this._submin_button
-    } 
-
-    get player():any {
-        return this._player;
-    } 
-
-    get comlite():boolean {
-        return this.complited();
     }
 
     private validate_name_input(INPUT:HTMLInputElement, tooltip:HTMLElement) {
@@ -111,15 +110,15 @@ export class Registration {
         }
         INPUT.parentElement.classList.remove("invalid");
         if(INPUT.value === "") {
-            tooltip = showMistake(INPUT,"name can not be empty");
+            tooltip = showMistake(INPUT,Const.inputNameMessegeEmpty);
             return tooltip;
         }
         if(/\d/.test(INPUT.value)){
-            tooltip = showMistake(INPUT,"name can not contain digits");
+            tooltip = showMistake(INPUT,Const.inputNameMessegeDigits);
             return tooltip;
         }
-        if(!/^[a-zA-Z ]+$/.test(INPUT.value)){
-            tooltip = showMistake(INPUT,"name can not contain s.simbols");
+        if(!/^[a-zа-яA-ZА-Я ]+$/.test(INPUT.value)){
+            tooltip = showMistake(INPUT,Const.inputNameMessegeSpSimbols);
             return tooltip;
         }
         INPUT.parentElement.classList.add("valid");
@@ -133,11 +132,11 @@ export class Registration {
         }
         this._email.parentElement.classList.remove("invalid");
         if(this._email.value === "") {
-            this._email_tooltip = showMistake(this._email,"email can not be empty");
+            this._email_tooltip = showMistake(this._email,Const.inputEmailMessegeEmpty);
             return this._email_tooltip;
         }
         if(!/^([a-zA-Z0-9_-]+\.)*[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)*\.[a-z]{2,6}$/.test(this._email.value)) {
-            this._email_tooltip = showMistake(this._email,"it's not an email");
+            this._email_tooltip = showMistake(this._email,Const.inputEmailMessegeNotEmail);
             return this._email_tooltip;
         }
         this._email.parentElement.classList.add("valid");
@@ -148,24 +147,40 @@ export class Registration {
         const image = this._image_input.files[0];
         const reader = new FileReader();
         reader.onload = () => {
-          this._image.style.backgroundImage = `url(${reader.result})`
+          this._image.style.backgroundImage = `url(${reader.result})`;
         };
         reader.readAsDataURL(image);
         this._image_input.value = "";
-        this._image.style.backgroundSize = "auto 163px"
+        this._image.style.backgroundSize = "auto 163px";
     }
 
     private complited():boolean {
-        return /^[a-zAA-z]+$/.test(this._first_name.value) &&
-               /^[a-zAA-z]+$/.test(this._last_name.value) &&
+        return /^[a-zа-яA-ZА-Я]+$/.test(this._first_name.value) &&
+               /^[a-zа-яA-ZА_Я]+$/.test(this._last_name.value) &&
                /^([a-zA-Z0-9_-]+\.)*[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)*\.[a-z]{2,6}$/.test(this._email.value);
     }
 
     private submit() {
-        this._player = new Player(this._first_name.value,this._last_name.value,this._email.value,this._image.style.backgroundImage)
+        this._player = new Player(this._first_name.value,this._last_name.value,
+            this._email.value,this._image.style.backgroundImage);
+        this._header.player = this._player;
+        
+        this._header.items.removeChild(this._header.items.lastChild);
+            
+        if(this._header.stopButton.style.display !== "none"){
+            this._header.stopButton.style.display = "none";  
+        }
+        
+        this._header.gameButton.style.display = "block";
+        const IMAGE = createAndAppendHtmlElement(this._header.items, "div", "header__image");
+        if(this._player.image === "") {
+            IMAGE.style.backgroundSize = "49px 49px";
+            return;
+         }
+        IMAGE.style.backgroundImage = this._player.image;
     }
 
     private clean() {
-        document.body.removeChild(this._pop_up)
+        document.body.removeChild(this._pop_up);
     }
 } 
