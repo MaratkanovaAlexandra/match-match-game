@@ -1,14 +1,23 @@
 import * as Const from "./../const";
+import { createAndAppendHtmlElement } from "../../add-element-function";
+
 import { Game } from "../game/game";
 import { Player } from "./../Player";
 import { Registration } from "./../registration/registration";
+import { BestScore } from "../best-score";
+import { HowToPlay } from "../how_to_play/how_to_play";
+import { GameSettings } from "../game settings/game_settings";
+import {settings} from "./../game settings/settings";
 
-import { createAndAppendHtmlElement } from "../../add-element-function";
 
 const typesCards = {
   animals: "animals",
   web_design: "web-design"
-};
+}
+const difficulty = {
+  level_two: 8,
+  level_four: 4
+}
 
 export class Header {
   private _header: HTMLElement;
@@ -35,10 +44,15 @@ export class Header {
     this.createNav();
     this.createButtons();
     this._header.addEventListener("click", () => {
-      if(event.target === this._register_button)  this.drawPlayer();
-      if(event.target === this._game_button) this.drawGame();
-      if(event.target === this._stop_button) this.stopGame();
-    })
+      const target = event.target as HTMLElement;
+      if(this._register_button.contains(target))  this.drawPlayer();
+      if(this._game_button.contains(target)) this.drawGame();
+      if(this._stop_button.contains(target)) this.stopGame();
+
+      if(this._about_game.contains(target)) this.toAboutGame();
+      if(this._top_score.contains(target)) this.toBestScore();
+      if(this._settings.contains(target)) this.toSettings();
+    });
   }
 
   private createHeader() {
@@ -54,16 +68,16 @@ export class Header {
   }
   private createNav() {
     this._nav = createAndAppendHtmlElement(this._items, "nav", "header__nav");
-    this._about_game = createAndAppendHtmlElement(this._nav, "div", "header__nav_item");
+    this._about_game = createAndAppendHtmlElement(this._nav, "button", "header__nav_item");
     createAndAppendHtmlElement(this._about_game, "div", "header__nav_item-about-game");
     createAndAppendHtmlElement(this._about_game, "div", "header__nav_item-text", Const.aboutGame);
     this._about_game.classList.add("nav-active");
 
-    this._top_score= createAndAppendHtmlElement(this._nav, "div", "header__nav_item");
+    this._top_score= createAndAppendHtmlElement(this._nav, "button", "header__nav_item");
     createAndAppendHtmlElement(this._top_score, "div", "header__nav_item-top-score");
     createAndAppendHtmlElement(this._top_score, "div", "header__nav_item-text", Const.topScore);
 
-    this._settings = createAndAppendHtmlElement(this._nav, "div", "header__nav_item");
+    this._settings = createAndAppendHtmlElement(this._nav, "button", "header__nav_item");
     createAndAppendHtmlElement(this._settings, "div", "header__nav_item-settings");
     createAndAppendHtmlElement(this._settings, "div", "header__nav_item-text", Const.settings);
   }
@@ -72,6 +86,7 @@ export class Header {
     this._stop_button =createAndAppendHtmlElement(this._items, "button", "header__button", Const.stopButton);
     this._game_button.id = "game_button";
     this._stop_button.id = "stop_button";
+    this._stop_button.style.display = "none";
     this._register_button =createAndAppendHtmlElement(this._items, "button", "header__button", Const.regButton);
   }
 
@@ -121,7 +136,8 @@ export class Header {
     this._game_button.style.display = "none";
     this._stop_button.style.display = "block";
     this._header.parentElement.removeChild(this._header.parentElement.lastChild);
-    this._game= new Game(this, 4, typesCards.web_design);
+    this._game= new Game(this,settings.difficulty[settings.activeItems.difficulty].value, 
+      settings.typesCards[settings.activeItems.typesCards].value);
     this._header.parentElement.appendChild(this._game.game);
   }
   private stopGame() {
@@ -131,6 +147,48 @@ export class Header {
       return;
     }
     this._game.gameStart();
+    if(this._header.parentElement.lastChild != this._game.game) {
+      this._header.parentElement.removeChild(this._header.parentElement.lastChild);
+      this._header.parentElement.appendChild(this._game.game);
+      this.removeActiveNav();
+    }
     this._stop_button.innerHTML = Const.stopButton;
+  }
+
+  private toAboutGame() {
+    if (this._about_game.classList.contains("nav-active")) return;
+    if(this._stop_button.style.display !== "none") this._stop_button.innerText = Const.contButton;
+    this.removeActiveNav();
+    this._about_game.classList.add("nav-active");
+    this._header.parentElement.removeChild(this._header.parentElement.lastChild);
+    const HOWTOPlAY = new HowToPlay();
+    
+    this._header.parentElement.appendChild(HOWTOPlAY.howtoplay);
+  }
+
+  private toBestScore() {
+    if (this._top_score.classList.contains("nav-active")) return;
+    if(this._stop_button.style.display !== "none") this._stop_button.innerText = Const.contButton;
+    this.removeActiveNav();
+    this._top_score.classList.add("nav-active");
+    this._header.parentElement.removeChild(this._header.parentElement.lastChild);
+    const BEST = new BestScore();
+    BEST.init();
+    this._header.parentElement.appendChild(BEST.bestScore);
+  }
+
+  private toSettings() {
+    if (this._settings.classList.contains("nav-active")) return;
+    if(this._stop_button.style.display !== "none") {
+      console.log(this._stop_button.style.display)
+      this._stop_button.style.display = "none";
+      this._game_button.style.display = "block";
+    }
+    
+    this.removeActiveNav();
+    this._settings.classList.add("nav-active");
+    this._header.parentElement.removeChild(this._header.parentElement.lastChild);
+    const SETTINS = new GameSettings();
+    this._header.parentElement.appendChild(SETTINS.init());
   }
 }

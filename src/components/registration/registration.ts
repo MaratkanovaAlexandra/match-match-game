@@ -7,7 +7,7 @@ import {Player} from "./../Player";
 function createInput(parent:HTMLElement, text:string):HTMLInputElement {
     const LABEL =  createAndAppendHtmlElement(parent, "label", "pop_up_window__form_filds_inputs-label");
     createAndAppendHtmlElement(LABEL, "h6", "pop_up_window__form_filds_inputs-text", text);
-    const INPUT = createAndAppendHtmlElement(LABEL, "input", "pop_up_window__form_filds_inputs-input");
+    const INPUT = createAndAppendHtmlElement(LABEL, "input", "pop_up_window__form_filds_inputs-input") as HTMLInputElement;;
     INPUT.type = "text";
     INPUT.maxLength = 30;
     return INPUT;
@@ -81,20 +81,22 @@ export class Registration {
         const INPUTS = createAndAppendHtmlElement(FILDS, "div", "pop_up_window__form_filds_inputs");
 
         //draw text inputs
-        this._first_name = createInput(INPUTS,Const.inputFirstName);
-        this._last_name = createInput(INPUTS,Const.inputLastName);
-        this._email = createInput(INPUTS,Const.inputEmail);
+        this._first_name = createInput(INPUTS,Const.inputFirstName) as HTMLInputElement;
+        this._last_name = createInput(INPUTS,Const.inputLastName)  as HTMLInputElement;
+        this._email = createInput(INPUTS,Const.inputEmail) as HTMLInputElement;
 
         //draw file input
-        this._image = createAndAppendHtmlElement(FILDS, "label", "pop_up_window__form_filds-image");
-        this._image_input = createAndAppendHtmlElement(this._image, "input", "pop_up_window__form_filds-file");
+        this._image = createAndAppendHtmlElement(FILDS, "label", "pop_up_window__form_filds-image") as HTMLLabelElement;
+        this._image_input = createAndAppendHtmlElement(this._image, "input", "pop_up_window__form_filds-file") as HTMLInputElement;
         this._image_input.id = "file_input";
         this._image_input.type = "file";
         this._image.htmlFor = "file_input";
 
         const BUTTONS = createAndAppendHtmlElement(FORM, "div","pop_up_window__form_buttons" );
-        this._submin_button = createAndAppendHtmlElement(BUTTONS, "button","pop_up_window__form_button-blue",Const.addBUtton);
-        this._exit_button = createAndAppendHtmlElement(BUTTONS, "button","pop_up_window__form_button-light", Const.closeButton);
+        this._submin_button = createAndAppendHtmlElement(BUTTONS, "button",
+        "pop_up_window__form_button-blue",Const.addBUtton) as HTMLInputElement;;
+        this._exit_button = createAndAppendHtmlElement(BUTTONS, "button",
+        "pop_up_window__form_button-light", Const.closeButton) as HTMLInputElement;;
         this._submin_button.type = "button";
         this._exit_button.type = "button";
     }

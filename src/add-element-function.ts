@@ -9,7 +9,7 @@
  *
  */
 export function createAndAppendHtmlElement(appendElement: HTMLElement, typeElement: string, 
-  classElement?: string, value?: string) : any{
+  classElement?: string, value?: string) : HTMLElement{
   const element = document.createElement(typeElement);
   if (typeof classElement !== "undefined") element.classList.add(classElement);
   if (typeof value !== "undefined") element.innerText = value;

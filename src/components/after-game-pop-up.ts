@@ -50,8 +50,10 @@ export class AfterGame {
 
         //draw buttons
         const BUTTONS = createAndAppendHtmlElement(FORM, "div","pop_up_window__form_buttons" );
-        this._submin_button = createAndAppendHtmlElement(BUTTONS, "button","pop_up_window__form_button-blue",Const.afterGameAddPlayer);
-        this._exit_button = createAndAppendHtmlElement(BUTTONS, "button","pop_up_window__form_button-light",Const.afterGameClose);
+        this._submin_button = createAndAppendHtmlElement(BUTTONS, "button",
+        "pop_up_window__form_button-blue",Const.afterGameAddPlayer) as HTMLInputElement;
+        this._exit_button = createAndAppendHtmlElement(BUTTONS, "button",
+        "pop_up_window__form_button-light",Const.afterGameClose) as HTMLInputElement;
 
         
     }

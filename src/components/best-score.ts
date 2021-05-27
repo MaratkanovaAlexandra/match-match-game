@@ -53,7 +53,7 @@ export class BestScore {
         const ELEMENT = createAndAppendHtmlElement(this._wrapper,"div","player_item");
 
         const IMAGE = createAndAppendHtmlElement(ELEMENT, "div", "player_image");
-        IMAGE.style.marginLef = "0";
+        IMAGE.style.marginLeft = "0";
         if(player.image === "") {
             IMAGE.style.backgroundSize = "49px 49px";
         } else {
