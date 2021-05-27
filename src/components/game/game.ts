@@ -81,7 +81,6 @@ export class Game {
         this._arr_cards.push(card2);
     }
     private drawCards(parent:HTMLElement) : void {
-        console.log(this._width_game)
         let game_row = createAndAppendHtmlElement(parent, "div", "game__row");
         for (let i = 0; i < this._arr_cards.length; i++) {
             game_row.appendChild(this._arr_cards[i].card);
@@ -103,7 +102,6 @@ export class Game {
     }
     private runTimer(timerHTML:HTMLElement, time_start:Date) : void {
         let copy_time_start = time_start;
-        console.log(copy_time_start)
         setInterval(() => {
             if (!this._stop) {
                 const now_time = new Date();
