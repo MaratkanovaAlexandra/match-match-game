@@ -11,5 +11,4 @@ const GAMESETTINGS = new GameSettings();
 
 
 ROOT.appendChild(HEADER.header);
-HEADER.init();
-ROOT.appendChild(GAMESETTINGS.init());
+ROOT.appendChild(HOWTOPlAY.howtoplay);
