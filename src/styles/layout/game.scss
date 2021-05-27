@@ -1,7 +1,9 @@
 .game {
+    position: relative;
     max-width: 1440px;
     margin: 33px auto 0 auto;
     padding: 27px;
+    padding-bottom: 0;
     display: flex;
     flex-direction: column;
     align-items: center;

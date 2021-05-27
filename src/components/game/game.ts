@@ -179,7 +179,7 @@ export class Game {
     }
 //// TODO ТУТ ПОЛНАЯ ХРЕНЬ ( пояснение: ибо ссылки быть не должно )
     private drawWindowWinner() : void {
-        const window_winner = createAndAppendHtmlElement(document.body, "div", "window_winner");
+        const window_winner = createAndAppendHtmlElement(this.game__wrapper, "div", "window_winner");
         const window_winner__window = createAndAppendHtmlElement(window_winner, "div", "window_winner__window");
         const text = `Congratulations! You successfully found all matches on ${this._time.minute }.${
             String( this._time.seconds ).length === 2 ? 
@@ -204,6 +204,7 @@ export class Game {
     public gamePause() : void {
         this._stop = true;
         this.game__wrapper.classList.add("game__wrapper--lock");
+        
     }
     public gameStart() : void {
         this._stop = false;

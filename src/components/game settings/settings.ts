@@ -15,11 +15,11 @@ export const settings = {
     ],
     difficulty: [
         {
-            value: 2,
+            value: 4,
             str: "Level one"
         },
         {
-            value: 4,
+            value: 6,
             str: "Level two"
         },
         {
