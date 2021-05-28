@@ -43,7 +43,9 @@ export class BestScore {
       const res = objectStore.getAll();
       res.onsuccess = () => {
         const result = res.result.reverse().slice(0, 10);
-        console.log(result);
+        if (result.length === 0) {
+          createAndAppendHtmlElement(this._wrapper, "p", "player__no_player", Const.noPlayers);
+        }
         result.forEach((item) => this.createPlayer(item));
       };
     };

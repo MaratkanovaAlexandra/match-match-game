@@ -17,6 +17,14 @@
   margin: 0;
 }
 
+@mixin smallText {
+  font-weight: normal;
+  font-size: 0.875rem;
+  line-height: 15px;
+
+  letter-spacing: 0.4px;
+}
+
 @mixin buttonText {
   font-family: "Roboto";
   font-weight: 500;

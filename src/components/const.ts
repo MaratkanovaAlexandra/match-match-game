@@ -29,3 +29,4 @@ export const afterGameClose = "cancel";
 //best players
 export const bestPlayers = "Best players";
 export const score = "Score:";
+export const noPlayers = "You can be the first!!";
