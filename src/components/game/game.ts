@@ -217,7 +217,7 @@ export class Game {
   //// TODO ТУТ ПОЛНАЯ ХРЕНЬ ( пояснение: ибо ссылки быть не должно )
   private drawWindowWinner(): void {
     const window_winner = createAndAppendHtmlElement(
-      this.game__wrapper,
+      document.body,
       "div",
       "window_winner"
     );
@@ -248,7 +248,7 @@ export class Game {
     this._header.player.score = this.score;
 
     window_winner__btn.addEventListener("click", () => {
-      //document.body.removeChild(document.body.lastChild); когда добавишь всплывающее окно в main раскомить
+      document.body.removeChild(document.body.lastChild);
       const AFTERGAME = new AfterGame(this._header);
       AFTERGAME.init();
       document.body.appendChild(AFTERGAME.pop_up);
