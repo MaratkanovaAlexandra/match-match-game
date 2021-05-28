@@ -6,6 +6,12 @@ export class GameSettings {
     const game_settings = document.createElement("div");
     game_settings.classList.add("game-settings");
 
+    this.drawSettingTypesCards(game_settings);
+    this.drawSettingDifficulty(game_settings);
+    
+    return game_settings;
+  }
+  private drawSettingTypesCards(game_settings:HTMLElement):void {
     const game_setting_cards_type = createAndAppendHtmlElement(
       game_settings,
       "div",
@@ -52,7 +58,8 @@ export class GameSettings {
       }
     }
     game_btn_type_cards.onclick = this.onClickBtnTypeCards;
-
+  }
+  private drawSettingDifficulty(game_settings:HTMLElement):void {
     const game_setting_difficulty = createAndAppendHtmlElement(
       game_settings,
       "div",
@@ -99,8 +106,6 @@ export class GameSettings {
       }
     }
     game_btn_difficulty.addEventListener("click", this.onClickBtnDifficulty);
-
-    return game_settings;
   }
 
   private onClickBtnTypeCards(event:MouseEvent) : void {

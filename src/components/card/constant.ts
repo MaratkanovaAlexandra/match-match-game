@@ -205,4 +205,4 @@ export const images = {
         WebDesignImg49,
         WebDesignImg50
     ]
-}
+};
