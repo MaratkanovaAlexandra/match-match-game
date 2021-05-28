@@ -14,8 +14,8 @@ export class Card {
     this._id = id;
     this.card = document.createElement("div");
     this.card.classList.add("card");
-    this.card.style.width = `${1000 / count_cards - 24}px`;
-    this.card.style.height = `${1000 / count_cards - 24}px`;
+    this.card.style.width = `${700 / count_cards - 24}px`;
+    this.card.style.height = `${700 / count_cards - 24}px`;
 
     const cardBack = createAndAppendHtmlElement(this.card, "div", "card__back");
     cardBack.style.backgroundImage = `url(${
