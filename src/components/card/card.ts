@@ -1,4 +1,5 @@
 import { createAndAppendHtmlElement } from "../../add-element-function";
+import { getImageByIdAndTypesCars } from "./intils";
 
 export class Card {
   card: HTMLElement;
@@ -18,9 +19,7 @@ export class Card {
     this.card.style.height = `${1000 / count_cards - 24}px`;
 
     const cardBack = createAndAppendHtmlElement(this.card, "div", "card__back");
-    cardBack.style.backgroundImage = `url(${
-      require(`./../../assets/game/${typePickture}/${srcImgBack}.png`).default
-    })`;
+    cardBack.style.backgroundImage = getImageByIdAndTypesCars(this._id, typePickture) ;
     cardBack.style.backgroundSize = "cover";
     createAndAppendHtmlElement(this.card, "div", "card__front");
   }
